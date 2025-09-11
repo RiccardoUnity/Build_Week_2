@@ -171,6 +171,62 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   sharedProfile: {fileID: 11400000, guid: a6560a915ef98420e9faacc1c7438823, type: 2}
+--- !u!1 &254410084
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 254410086}
+  - component: {fileID: 254410085}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &254410085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 254410084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c978b780a0aa982408710dfe762d727d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _musicSource: {fileID: 0}
+  _sfxSource: {fileID: 0}
+  _mainMenuMusic: {fileID: 0}
+  _gameplayMusic: {fileID: 0}
+  _jumpSound: {fileID: 0}
+  _slideSound: {fileID: 0}
+  _coinCollectSound: {fileID: 0}
+  _powerUpCollectSound: {fileID: 0}
+  _obstacleHitSound: {fileID: 0}
+  _musicVolume: 0.7
+  _sfxVolume: 0.8
+  _fadeDuration: 1
+--- !u!4 &254410086
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 254410084}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &277816400
 GameObject:
   m_ObjectHideFlags: 0
@@ -203,7 +259,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 453512312}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &277816403
 MeshRenderer:
@@ -310,8 +366,6 @@ Transform:
   - {fileID: 1299081227}
   - {fileID: 1665124455}
   - {fileID: 662448364}
-  - {fileID: 277816401}
-  - {fileID: 2131674844}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &492612713
@@ -1006,7 +1060,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 453512312}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &2131674845
 Rigidbody:
@@ -1125,14 +1179,21 @@ MonoBehaviour:
   onLaneDistance: 3
   laneMultiplier: 80
   jumpForce: 8
+  slideDuration: 1
+  slideRotationAngle: 90
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 8
   groundCheckOffset: 1.01
+  groundCheckRadius: 0.2
   showGroundCheckGizmos: 1
+  showSlideColliderGizmos: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 453512312}
   - {fileID: 903236837}
+  - {fileID: 277816401}
+  - {fileID: 2131674844}
+  - {fileID: 254410086}
