@@ -142,4 +142,12 @@ public class PlayerController : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position + Vector3.down * groundCheckOffset, groundCheckRadius);
     }
     #endregion
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Obstacles"))
+        {
+            animator.SetTrigger("isFalling");
+        }
+    }
 }

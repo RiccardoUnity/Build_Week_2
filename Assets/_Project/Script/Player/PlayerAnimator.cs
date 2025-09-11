@@ -24,12 +24,16 @@ public class PlayerAnimator : MonoBehaviour
             }
         }
     }
-    private void OnTriggerEnter(Collider other)
+    //private void OnCollisio(Collider other)
+    //{
+    //    Debug.Log(other);
+    //    if (other.gameObject.layer == LayerMask.NameToLayer("Obstacles"))
+    //    {
+    //        _animator.SetTrigger("falling");
+    //    }
+    //}
+    private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(other);
-        if (other.gameObject.layer == LayerMask.NameToLayer("Obstacles"))
-        {
-            _animator.SetTrigger("falling");
-        }
+        Debug.Log(collision);
     }
 }
