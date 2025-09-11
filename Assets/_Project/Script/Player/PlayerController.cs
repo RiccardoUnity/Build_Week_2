@@ -18,13 +18,14 @@ public class PlayerController : MonoBehaviour
 
     [Header("Jump Settings")]
     public float jumpForce = 7f;
+    private bool _isJumping = false;
 
     [Header("Slide Settings")]
-    public Animator animator;
+    //public Animator animator;
     public float slideDuration = 1f;
+    public float slideRotationAngle = 90f;
     private bool _isSliding = false;
-    private float _originalColliderHeight;
-    private Vector3 _originalColliderCenter;
+    private Vector3 _originalRotation;
     private CapsuleCollider _capsule;
 
     [Header("Ground Check Settings")]
@@ -35,6 +36,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Debug Features")]
     public bool showGroundCheckGizmos = true;
+    public bool showSlideColliderGizmos = false;
 
     private void Start()
     {
@@ -42,13 +44,12 @@ public class PlayerController : MonoBehaviour
         _rb.freezeRotation = true;
 
         _capsule = GetComponent<CapsuleCollider>();
-        _originalColliderHeight = _capsule.height;
-        _originalColliderCenter = _capsule.center;
+        _originalRotation = transform.eulerAngles;
     }
 
     private void FixedUpdate()
     {
-        Move();        
+        Move();
     }
 
     private void Update()
@@ -62,7 +63,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.W) && _isGrounded) Jump();
     }
 
-    #region Move and Lane changing
+    #region Move & Lane changing
     private void Move() // <- gestisce il movimento continuo del Player
     {
         _horizontalInput = Input.GetAxis("Horizontal");
@@ -97,29 +98,38 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
 
-    #region Slide and Jump
-    private IEnumerator Slide() // <- gestisce la scivolata
+    #region Slide & Jump
+    private IEnumerator Slide() // <- gestisce la scivolata ruotando il player
     {
+        if (_isSliding) yield break; // <- per prevenire slide multipli
+        if (_isJumping) yield break; // <- per prevenire slide durante il salto
+
         _isSliding = true;
 
-        animator.SetBool("isSliding", true);
+        //if (AudioManager.Instance != null) AudioManager.Instance.PlaySlideSound();
 
-        _capsule.height = 1f;
-        _capsule.center = new Vector3(0f, -.5f, 0f);
+        //animator.SetBool("slide", true);
+
+        Vector3 targetRotation = _originalRotation + Vector3.forward * slideRotationAngle;
+        transform.eulerAngles = targetRotation;
 
         yield return new WaitForSeconds(slideDuration);
 
-        _capsule.height = _originalColliderHeight;
-        _capsule.center = _originalColliderCenter;
+        transform.eulerAngles = _originalRotation;
 
-        animator.SetBool("isSliding", false);
+        //animator.SetBool("slide", false);
 
         _isSliding = false;
     }
 
-
     private void Jump() // <- gestisce il salto
     {
+        if (_isSliding) return; // <- per non saltare durante lo slide
+
+        _isJumping = true;
+
+        //if (AudioManager.Instance != null) AudioManager.Instance.PlayJumpSound();
+
         Vector3 vel = _rb.velocity;
         vel.y = 0f;
         _rb.velocity = vel;
@@ -131,15 +141,42 @@ public class PlayerController : MonoBehaviour
     #region Ground Checker
     private void GroundChecker() // <- check sphere sotto i piedi per verificare il contatto col terreno
     {
+        bool wasGrounded = _isGrounded;
         _isGrounded = Physics.CheckSphere(transform.position + Vector3.down * groundCheckOffset, 0.2f, groundLayerMask);
+
+        if (!wasGrounded && _isGrounded && _isJumping) _isJumping = false; // <- se il player è appena atterrato, smette di considerarlo in salto
     }
 
-    private void OnDrawGizmosSelected() // <- disegna un gizmo relativo alla check sphere
+    private void OnDrawGizmosSelected() // <- disegna un gizmo relativo alla check sphere e al collider del player (utile per capire come si comporta durante lo slide)
     {
-        if (!showGroundCheckGizmos) return;
+        if (showGroundCheckGizmos)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(transform.position + Vector3.down * groundCheckOffset, groundCheckRadius);
+        }
 
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position + Vector3.down * groundCheckOffset, groundCheckRadius);
+        if (showSlideColliderGizmos && _isSliding && _capsule != null)
+        {
+            Gizmos.color = Color.red;
+
+            // disegna una semplice rappresentazione del collider ruotato
+            Vector3 colliderSize = new Vector3(_capsule.radius * 2, _capsule.height, _capsule.radius * 2);
+            Vector3 colliderCenter = transform.position + _capsule.center;
+
+            Gizmos.DrawWireCube(colliderCenter, colliderSize); // <- disegna un cubo che rappresenta approssimativamente il collider ruotato
+
+            Gizmos.color = Color.yellow;
+            Vector3 forward = transform.forward * (_capsule.height * 0.5f);
+            Gizmos.DrawLine(colliderCenter - forward, colliderCenter + forward); // <- disegna anche una linea per indicare la direzione della rotazione
+        }
     }
     #endregion
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Obstacles"))
+        {
+            animator.SetTrigger("isFalling");
+        }
+    }
 }
