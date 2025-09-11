@@ -44,12 +44,12 @@ public class OptionsManager : MonoBehaviour
     }
     public void ChangeMusicVolume(float Value)
     {
-        float dB = Mathf.Lerp(30, 0f, Value);
+        float dB = Mathf.Lerp(0, -80f, Value);
         _AudioMixer.SetFloat("MusicVolume", dB);
     }
     public void ChangeEffectsVolume(float Value)
     {
-        float dB = Mathf.Lerp(30, 0f, Value);
+        float dB = Mathf.Lerp(0f, -80f, Value);
         _AudioMixer.SetFloat("EffectsVolume", dB);
     }
 }

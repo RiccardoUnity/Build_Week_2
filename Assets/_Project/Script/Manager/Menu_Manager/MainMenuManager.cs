@@ -36,6 +36,12 @@ public class MainMenuManager : MonoBehaviour
                 break;
         }
     }
+    public void SoundOnClick(AudioSource audioSource)
+    {
+        audioSource.Play();
+
+
+    }
     public void SceneLoader(string _SceneName)
     {
         SceneManager.LoadScene(_SceneName);
