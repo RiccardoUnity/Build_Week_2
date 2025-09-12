@@ -43,10 +43,10 @@ public class CoinLocalManager : MonoBehaviour
             {
                 for (int i = 0; i < _coinPointSpawns.Count; i++)
                 {
-                    if (_coinPointSpawns[i].transform.localPosition.z > minZ
-                        && _coinPointSpawns[i].transform.localPosition.z < maxZ)
+                    if (_coinPointSpawns[i].transform.position.z > minZ
+                        && _coinPointSpawns[i].transform.position.z < maxZ)
                     {
-                        maxZ = _coinPointSpawns[i].transform.localPosition.z;
+                        maxZ = _coinPointSpawns[i].transform.position.z;
                         index = i;
                     }
                 }
@@ -66,7 +66,7 @@ public class CoinLocalManager : MonoBehaviour
         float randomStart = 1f - _ratioToSpawn;
         randomStart = Random.Range(0f, randomStart);
         int coinStart = (int)Mathf.Lerp(0, _coinPointSpawns.Count, randomStart);
-        int coinTotal = (int)(_coinPointSpawns.Count * _ratioToSpawn);
+        int coinTotal = coinStart + (int)(_coinPointSpawns.Count * _ratioToSpawn);
         for (int i = coinStart; i < coinTotal; i++)
         {
             _coinPointSpawns[i].gameObject.SetActive(true);
