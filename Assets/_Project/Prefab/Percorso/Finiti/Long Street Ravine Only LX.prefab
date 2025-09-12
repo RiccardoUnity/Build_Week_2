@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8302210660428567077}
+  - component: {fileID: 6439188208705627124}
   m_Layer: 0
   m_Name: Long Street Ravine Only LX
   m_TagString: Untagged
@@ -36,6 +37,19 @@ Transform:
   - {fileID: 6970073208223051070}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6439188208705627124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4163824915526479734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d6a49fbd2752c64ca3ec8f4fdb82442, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _lane: 0
 --- !u!1001 &671384646726217911
 PrefabInstance:
   m_ObjectHideFlags: 0

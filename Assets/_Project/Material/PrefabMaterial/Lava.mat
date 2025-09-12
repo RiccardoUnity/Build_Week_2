@@ -54,9 +54,9 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Speed: 0.1
-    - _Zoom: 5
+    - _Zoom: 1
     m_Colors:
     - _Color1: {r: 1, g: 0, b: 0, a: 0}
     - _Color2: {r: 1, g: 0.8862745, b: 0, a: 0}
-    - _Tiling: {r: 0.3, g: 1, b: 0, a: 0}
+    - _Tiling: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []

@@ -36,4 +36,6 @@ public class CoinPointSpawn : MonoBehaviour
             gameObject.SetActive(false);
         }
     }
+
+    void OnDestroy() => _coinLocalManager.RemoveCoinInList(this);
 }

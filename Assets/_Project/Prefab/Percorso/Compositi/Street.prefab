@@ -99,6 +99,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Corsia RX
       objectReference: {fileID: 0}
+    - target: {fileID: 7665499484714478895, guid: f21b7c39e87d16746a272eec0feb7dd0,
+        type: 3}
+      propertyPath: m_TagString
+      value: Right
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
