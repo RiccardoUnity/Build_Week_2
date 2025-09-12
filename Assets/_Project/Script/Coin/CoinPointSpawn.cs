@@ -1,6 +1,6 @@
 using UnityEngine;
 using SGM;
-using LaneName = SGM.S_GameManager;
+using Name = SGM.S_GameManager;
 
 public class CoinPointSpawn : MonoBehaviour
 {
@@ -12,15 +12,15 @@ public class CoinPointSpawn : MonoBehaviour
         _coinLocalManager = GetComponentInParent<CoinLocalManager>();
         _coinLocalManager.AddCoinInList(this);
 
-        if (transform.parent.tag.Equals(LaneName.GetLaneName(0)))
+        if (transform.parent.tag.Equals(Name.GetLaneName(0)))
         {
             _lane = Lane.Left;
         }
-        else if (transform.parent.tag.Equals(LaneName.GetLaneName(1)))
+        else if (transform.parent.tag.Equals(Name.GetLaneName(1)))
         {
             _lane = Lane.Center;
         }
-        else if (transform.parent.tag.Equals(LaneName.GetLaneName(2)))
+        else if (transform.parent.tag.Equals(Name.GetLaneName(2)))
         {
             _lane = Lane.Right;
         }
@@ -30,7 +30,7 @@ public class CoinPointSpawn : MonoBehaviour
 
     void OnTriggerEnter(Collider collider)
     {
-        if (collider.gameObject.layer == CoinManager.Instance.GetPlayerLayerMask())
+        if (collider.gameObject.tag.Equals(Name.GetTagPlayer()))
         {
             CoinManager.Instance.CoinPickUp();
             gameObject.SetActive(false);

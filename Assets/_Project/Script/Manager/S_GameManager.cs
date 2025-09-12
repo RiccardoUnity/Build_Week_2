@@ -18,6 +18,8 @@ namespace SGM
 
         public static string GetVertical() => "Vertical";
 
+        public static string GetTagPlayer() => "Player";
+
         //0 facile --- 1 difficile
         private static float _difficulty = 0.5f;
 
