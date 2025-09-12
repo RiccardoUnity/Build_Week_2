@@ -15,17 +15,17 @@ public class PlayerController : MonoBehaviour
     public float onLaneDistance = 3f;
     public float laneMultiplier = 80f;
     private int _laneInput = 1; // <- 0: sinistra   1: centro   2: destra
+    private Animator _animator;
 
     [Header("Jump Settings")]
     public float jumpForce = 7f;
     private bool _isJumping = false;
 
     [Header("Slide Settings")]
-    public Animator animator;
     public float slideDuration = 1f;
-    public float slideRotationAngle = 90f;
     private bool _isSliding = false;
-    private Vector3 _originalRotation;
+    private float _originalColliderHeight;
+    private float _colliderResize = .7f;
     private CapsuleCollider _capsule;
 
     [Header("Ground Check Settings")]
@@ -41,13 +41,18 @@ public class PlayerController : MonoBehaviour
     public bool IsJumping => _isJumping;
     public bool IsSliding => _isSliding;
 
+    public string hitTrigger = "fall";
+    public string crashedTrigger = "crashed";
+
     private void Start()
     {
         _rb = GetComponent<Rigidbody>();
         _rb.freezeRotation = true;
 
         _capsule = GetComponent<CapsuleCollider>();
-        _originalRotation = transform.eulerAngles;
+        _originalColliderHeight = _capsule.height;
+
+        _animator = GetComponentInChildren<Animator>();
     }
 
     private void FixedUpdate()
@@ -111,16 +116,12 @@ public class PlayerController : MonoBehaviour
 
         if (AudioManager.Instance != null) AudioManager.Instance.PlaySlideSound();
 
-        //animator.SetBool("slide", true);
-
-        Vector3 targetRotation = _originalRotation + Vector3.forward * slideRotationAngle;
-        transform.eulerAngles = targetRotation;
+        float colliderResize = _capsule.height - _colliderResize;
+        _capsule.height = colliderResize;
 
         yield return new WaitForSeconds(slideDuration);
 
-        transform.eulerAngles = _originalRotation;
-
-        //animator.SetBool("slide", false);
+        _capsule.height = _originalColliderHeight;
 
         _isSliding = false;
     }
@@ -146,7 +147,6 @@ public class PlayerController : MonoBehaviour
     {
         bool wasGrounded = _isGrounded;
         _isGrounded = Physics.CheckSphere(transform.position + Vector3.down * groundCheckOffset, 0.2f, groundLayerMask);
-
         if (!wasGrounded && _isGrounded && _isJumping) _isJumping = false; // <- se il player è appena atterrato, smette di considerarlo in salto
     }
 
@@ -174,4 +174,11 @@ public class PlayerController : MonoBehaviour
         }
     }
     #endregion
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Obstacles")) _animator.SetTrigger(hitTrigger);
+
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Default")) _animator.SetTrigger(crashedTrigger);
+    }
 }
