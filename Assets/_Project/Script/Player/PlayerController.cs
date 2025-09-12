@@ -38,6 +38,9 @@ public class PlayerController : MonoBehaviour
     public bool showGroundCheckGizmos = true;
     public bool showSlideColliderGizmos = false;
 
+    public bool IsJumping => _isJumping;
+    public bool IsSliding => _isSliding;
+
     private void Start()
     {
         _rb = GetComponent<Rigidbody>();
@@ -171,12 +174,4 @@ public class PlayerController : MonoBehaviour
         }
     }
     #endregion
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Obstacles"))
-        {
-            animator.SetTrigger("isFalling");
-        }
-    }
 }
