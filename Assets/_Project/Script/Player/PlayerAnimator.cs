@@ -14,23 +14,13 @@ public class PlayerAnimator : MonoBehaviour
     {
         if (_animator != null)
         {
-<<<<<<< Updated upstream
-            if (Input.GetKeyDown(KeyCode.W))
-            {
-                _animator.SetTrigger("jump");
+            if (Input.GetKeyDown(KeyCode.W)) _animator.SetTrigger("jump");
             }
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                _animator.SetTrigger("slide");
-            }
-=======
-            if (Input.GetKeyDown(KeyCode.Space)) _animator.SetTrigger("jump");
-
             if (Input.GetKeyDown(KeyCode.S)) _animator.SetTrigger("slide");
->>>>>>> Stashed changes
         }
     }
-    //private void OnCollisio(Collider other)
+
+    //private void OnCollision(Collider other)
     //{
     //    Debug.Log(other);
     //    if (other.gameObject.layer == LayerMask.NameToLayer("Obstacles"))
@@ -38,8 +28,7 @@ public class PlayerAnimator : MonoBehaviour
     //        _animator.SetTrigger("falling");
     //    }
     //}
-    private void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log(collision);
-    }
-}
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    Debug.Log(collision);
+    //}

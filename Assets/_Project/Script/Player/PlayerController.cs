@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     private bool _isJumping = false;
 
     [Header("Slide Settings")]
-    //public Animator animator;
+    public Animator animator;
     public float slideDuration = 1f;
     public float slideRotationAngle = 90f;
     private bool _isSliding = false;
@@ -106,7 +106,7 @@ public class PlayerController : MonoBehaviour
 
         _isSliding = true;
 
-        //if (AudioManager.Instance != null) AudioManager.Instance.PlaySlideSound();
+        if (AudioManager.Instance != null) AudioManager.Instance.PlaySlideSound();
 
         //animator.SetBool("slide", true);
 
@@ -128,7 +128,7 @@ public class PlayerController : MonoBehaviour
 
         _isJumping = true;
 
-        //if (AudioManager.Instance != null) AudioManager.Instance.PlayJumpSound();
+        if (AudioManager.Instance != null) AudioManager.Instance.PlayJumpSound();
 
         Vector3 vel = _rb.velocity;
         vel.y = 0f;
