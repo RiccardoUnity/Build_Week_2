@@ -140,9 +140,9 @@ namespace SGM
         public static float GetMusic() => PlayerPrefs.GetFloat(_music, _defaultValue);
         public static float GetBrightness() => PlayerPrefs.GetFloat(_brightness, _defaultValue);
 
-        public static void SetEffects(float value) => PlayerPrefs.SetFloat(_effects, value);
-        public static void GetMusic(float value) => PlayerPrefs.SetFloat(_music, value);
-        public static void SetBrightness(float value) => PlayerPrefs.SetFloat(_brightness, value);
+        public static void SaveEffects(float value) => PlayerPrefs.SetFloat(_effects, value);
+        public static void SaveMusic(float value) => PlayerPrefs.SetFloat(_music, value);
+        public static void SaveBrightness(float value) => PlayerPrefs.SetFloat(_brightness, value);
         #endregion
 
         #region Leaderboard
