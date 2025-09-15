@@ -11,22 +11,23 @@ namespace SGM
 
     public static class S_GameManager
     {
+        #region Coin Logic
         private static string[] _laneName = { "Left", "Center", "Right" };
         public static string GetLaneName(int id) => _laneName[id];
+        #endregion
 
+        #region Difficulty
+        private const float _multiplyDifficulty = 0.01f;
+
+        public static float Difficulty() => 1f + CoinManager.Instance.GetCoinPickUp() * _multiplyDifficulty;
+        #endregion
+
+        #region String
         public static string GetHorizontal() => "Horizontal";
 
         public static string GetVertical() => "Vertical";
 
         public static string GetTagPlayer() => "Player";
-
-        //0 facile --- 1 difficile
-        private static float _difficulty = 0.5f;
-
-        public static float Difficulty
-        {
-            get => _difficulty;
-            set => Mathf.Clamp01(value);
-        }
+        #endregion
     }
 }
