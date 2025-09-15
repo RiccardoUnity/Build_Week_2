@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     private float _lastRunningSoundTime;
 
     [Header("Jump Settings")]
-    public float jumpForce = 7f;
+    public float jumpForce = 3f;
     private bool _isJumping = false;
 
     [Header("Slide Settings")]
@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
     public bool showSlideColliderGizmos = false;
 
     [Header("Unity Events")]
-    public UnityEvent lavaTouchedEvent;
+    public UnityEvent playerDeadEvent;
 
     public bool IsJumping => _isJumping;
     public bool IsSliding => _isSliding;
@@ -72,26 +72,36 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        ChangeLane();
+        if(_isAlive)
+        {
+            ChangeLane();
 
-        GroundChecker();
+            GroundChecker();
 
-        if (Input.GetKeyDown(KeyCode.S)) StartCoroutine(Slide());
+            if (Input.GetKeyDown(KeyCode.S)) StartCoroutine(Slide());
 
-        if (Input.GetKeyDown(KeyCode.W) && _isGrounded) Jump();
+            if (Input.GetKeyDown(KeyCode.W) && _isGrounded) Jump();
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Obstacles")) _playerAnimator.TriggerFallAnimation();
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Obstacles"))
+        {
+            _playerAnimator.TriggerFallAnimation();
+            PlayerDead();
+        }
 
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Default")) _playerAnimator.TriggerCrashAnimation();
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Default"))
+        {
+            _playerAnimator.TriggerCrashAnimation();
+            PlayerDead();
+        }
 
         if (collision.gameObject.layer == LayerMask.NameToLayer("Lava"))
         {
-            _isAlive = false;
             _playerAnimator.TriggerDeathAnimation();
-            lavaTouchedEvent.Invoke();
+            PlayerDead();
         }
     }
 
@@ -207,6 +217,14 @@ public class PlayerController : MonoBehaviour
             Vector3 forward = transform.forward * (_capsule.height * 0.5f);
             Gizmos.DrawLine(colliderCenter - forward, colliderCenter + forward); // <- disegna anche una linea per indicare la direzione della rotazione
         }
+    }
+    #endregion
+
+    #region Death
+    private void PlayerDead()
+    {
+        _isAlive = false;
+        playerDeadEvent.Invoke();
     }
     #endregion
 }

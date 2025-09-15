@@ -8,14 +8,13 @@ public class PlayerAnimator : MonoBehaviour
     private Animator _animator;
 
     [Header("Animation Triggers")]
-    private const string jumpTrigger = "jump";
+    private const string jumpTrigger = "isJumping";
     private const string slideTrigger = "slide";
     private const string fallTrigger = "fall";
     private const string crashedTrigger = "crashed";
     private const string deadTrigger = "dead";
 
     private PlayerController _playerController;
-    private bool _wasJumping = false;
     private bool _wasSliding = false;
 
     private void Awake()
@@ -32,9 +31,7 @@ public class PlayerAnimator : MonoBehaviour
 
     private void CheckJumpAnimation()
     {
-        if (_playerController.IsJumping && !_wasJumping) _animator.SetTrigger(jumpTrigger);
-
-        _wasJumping = _playerController.IsJumping;
+        _animator.SetBool(jumpTrigger, _playerController.IsJumping);
     }
 
     private void CheckSlideAnimation()
