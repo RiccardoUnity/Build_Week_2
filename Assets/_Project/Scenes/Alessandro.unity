@@ -181,6 +181,16 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5614430680831173394, guid: 1fe01c15d35d1ec43bbac4b7c603a1bd,
         type: 3}
+      propertyPath: showGroundCheckGizmos
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5614430680831173394, guid: 1fe01c15d35d1ec43bbac4b7c603a1bd,
+        type: 3}
+      propertyPath: groundLayerMask.m_Bits
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 5614430680831173394, guid: 1fe01c15d35d1ec43bbac4b7c603a1bd,
+        type: 3}
       propertyPath: lavaTouchedEvent.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -566,7 +576,7 @@ PrefabInstance:
     - target: {fileID: 4635980221256427431, guid: b632c48a37723bf4b9d1d3beb4aab69d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.11
+      value: 1.7
       objectReference: {fileID: 0}
     - target: {fileID: 4635980221256427431, guid: b632c48a37723bf4b9d1d3beb4aab69d,
         type: 3}
@@ -771,7 +781,7 @@ Transform:
   m_GameObject: {fileID: 1204907838}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.28, y: 1.74, z: -4.26}
+  m_LocalPosition: {x: 2.02, y: 1.74, z: -4.26}
   m_LocalScale: {x: 2.0075, y: 0.82340837, z: 0.30349}
   m_ConstrainProportionsScale: 0
   m_Children: []
