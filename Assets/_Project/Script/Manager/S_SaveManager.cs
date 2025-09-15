@@ -64,7 +64,13 @@ namespace SGM
 
         public void InsertPosition(int index, int value)
         {
-
+            int sort;
+            for (int i = index; i < _maxPosition; ++i)
+            {
+                sort = _position[i];
+                _position[i] = value;
+                value = sort;
+            }
         }
     }
 
