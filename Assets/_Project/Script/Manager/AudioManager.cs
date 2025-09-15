@@ -16,6 +16,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip _gameplayMusic;
 
     [Header("SFX Settings")]
+    [SerializeField] private AudioClip _runningSound;
     [SerializeField] private AudioClip _jumpSound;
     [SerializeField] private AudioClip _slideSound;
     [SerializeField] private AudioClip _coinCollectSound;
@@ -118,6 +119,11 @@ public class AudioManager : MonoBehaviour
     #endregion
 
     #region SFX Methods
+    public void PlayRunningSound()
+    {
+        if (_runningSound != null) _sfxSource.PlayOneShot(_runningSound);
+    }
+    
     public void PlayJumpSound()
     {
         if (_jumpSound != null) _sfxSource.PlayOneShot(_jumpSound);

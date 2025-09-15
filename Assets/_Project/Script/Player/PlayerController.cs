@@ -15,7 +15,10 @@ public class PlayerController : MonoBehaviour
     public float onLaneDistance = 3f;
     public float laneMultiplier = 80f;
     private int _laneInput = 1; // <- 0: sinistra   1: centro   2: destra
-    private Animator _animator;
+
+    [Header("Running Settings")]
+    public float runningSoundInterval = .5f;
+    private float _lastRunningSoundTime;
 
     [Header("Jump Settings")]
     public float jumpForce = 7f;
@@ -41,9 +44,6 @@ public class PlayerController : MonoBehaviour
     public bool IsJumping => _isJumping;
     public bool IsSliding => _isSliding;
 
-    public string hitTrigger = "fall";
-    public string crashedTrigger = "crashed";
-
     private void Start()
     {
         _rb = GetComponent<Rigidbody>();
@@ -51,8 +51,6 @@ public class PlayerController : MonoBehaviour
 
         _capsule = GetComponent<CapsuleCollider>();
         _originalColliderHeight = _capsule.height;
-
-        _animator = GetComponentInChildren<Animator>();
     }
 
     private void FixedUpdate()
@@ -80,6 +78,8 @@ public class PlayerController : MonoBehaviour
         Vector3 horMove = transform.right * (_horizontalInput * horizontalMultiplier) * (forwardSpeed * Time.fixedDeltaTime);
 
         _rb.MovePosition(_rb.position + fwdMove + horMove);
+
+        HandleRunningSounds();
     }
 
     private void ChangeLane() // <- gestisce il cambio di corsia
@@ -106,8 +106,17 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
 
-    #region Slide & Jump
-    private IEnumerator Slide() // <- gestisce la scivolata ruotando il player
+    #region Running, Slide & Jump
+    private void HandleRunningSounds() // <- gestisce il suono dei passi
+    {
+        if (_isGrounded && !_isSliding && Time.time - _lastRunningSoundTime >= runningSoundInterval)
+        {
+            if (AudioManager.Instance != null) AudioManager.Instance.PlayRunningSound();
+            _lastRunningSoundTime = Time.time;
+        }
+    }
+    
+    private IEnumerator Slide() // <- gestisce la scivolata
     {
         if (_isSliding) yield break; // <- per prevenire slide multipli
         if (_isJumping) yield break; // <- per prevenire slide durante il salto
@@ -143,7 +152,7 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     #region Ground Checker
-    private void GroundChecker() // <- check sphere sotto i piedi per verificare il contatto col terreno
+    private void GroundChecker() // <- check sphere per verificare il contatto con il terreno
     {
         bool wasGrounded = _isGrounded;
         _isGrounded = Physics.CheckSphere(transform.position + Vector3.down * groundCheckOffset, 0.2f, groundLayerMask);
@@ -174,11 +183,4 @@ public class PlayerController : MonoBehaviour
         }
     }
     #endregion
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Obstacles")) _animator.SetTrigger(hitTrigger);
-
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Default")) _animator.SetTrigger(crashedTrigger);
-    }
 }

@@ -10,16 +10,16 @@ public class PlayerAnimator : MonoBehaviour
     [Header("Animation Triggers")]
     private const string jumpTrigger = "jump";
     private const string slideTrigger = "slide";
+    private const string hitTrigger = "hit";
+    private const string crashedTrigger = "crashed";
 
     private PlayerController _playerController;
-
     private bool _wasJumping = false;
     private bool _wasSliding = false;
 
     private void Awake()
     {
         if (_animator == null) _animator = GetComponent<Animator>();
-
         _playerController = GetComponentInParent<PlayerController>();
     }
 
@@ -41,5 +41,12 @@ public class PlayerAnimator : MonoBehaviour
         if (_playerController.IsSliding && !_wasSliding) _animator.SetTrigger(slideTrigger);
 
         _wasSliding = _playerController.IsSliding;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Obstacles")) _animator.SetTrigger(hitTrigger);
+
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Default")) _animator.SetTrigger(crashedTrigger);
     }
 }
