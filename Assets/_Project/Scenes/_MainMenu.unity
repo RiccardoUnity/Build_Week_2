@@ -354,8 +354,66 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1584649455}
+  - {fileID: 908010672}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &908010671
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 908010672}
+  - component: {fileID: 908010673}
+  m_Layer: 0
+  m_Name: ---AudioManager---
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &908010672
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 908010671}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 881.6197, y: 541.00366, z: 6.8611846}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 903236837}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &908010673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 908010671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c978b780a0aa982408710dfe762d727d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _musicSource: {fileID: 0}
+  _sfxSource: {fileID: 0}
+  _mainMenuMusic: {fileID: 0}
+  _gameplayMusic: {fileID: 8300000, guid: 738fbf93d09db4990bf9738e85970525, type: 3}
+  _jumpSound: {fileID: 8300000, guid: 3c48b07dee5c544caa232221c254f2f5, type: 3}
+  _slideSound: {fileID: 0}
+  _coinCollectSound: {fileID: 8300000, guid: 2c30839f6c12e934893d1d7270079aa1, type: 3}
+  _powerUpCollectSound: {fileID: 8300000, guid: 36582933c15054c21a3211beb7f12cd5,
+    type: 3}
+  _obstacleHitSound: {fileID: 8300000, guid: 1268f56ea4dff47f180c5a60c2d12150, type: 3}
+  _musicVolume: 0.7
+  _sfxVolume: 0.8
+  _fadeDuration: 1
 --- !u!1 &1584649451
 GameObject:
   m_ObjectHideFlags: 0
