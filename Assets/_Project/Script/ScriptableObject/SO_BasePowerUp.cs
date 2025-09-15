@@ -1,21 +1,6 @@
-using UnityEngine;
-using System;
-using System.Collections;
 using SGM;
-
-public enum Key
-{
-    One,
-    Two,
-    Three
-}
-
-public enum Level
-{
-    One,
-    Two,
-    Three
-}
+using System.Collections;
+using UnityEngine;
 
 public abstract class SO_BasePowerUp : ScriptableObject
 {
@@ -27,25 +12,38 @@ public abstract class SO_BasePowerUp : ScriptableObject
     public Sprite icon;
     public int cost;
     public Level level;
-    public Key inputKey;
 
     [Header("Timer Ricarica")]
     public float rechargeTime = 10f;
+    IEnumerator timer;
 
-    public IEnumerator TimerRecharge(float timer, Action callback) // <- coroutine per il timer di ricarica
+    public IEnumerator Timer() // <- coroutine per il timer di ricarica
     {
+        float timer = rechargeTime;
         Debug.Log($"Iniziando ricarica per {powerUpName} - {timer} secondi");
 
+        EnterUse();
         while (timer > 0)
         {
             timer -= Time.deltaTime;
             yield return null;
+            StayUse();
         }
-
+        yield return null;
+        ExitUse();
         Debug.Log($"Ricarica completata per {powerUpName}");
-
-        callback?.Invoke();
     }
 
-    public abstract void Use();
+    public void Use(PlayerPowerUp player)
+    {
+        if (timer != null)
+        {
+            timer = Timer();
+            player.StartCoroutine(timer);
+        }
+    }
+
+    protected abstract void EnterUse();
+    protected abstract void StayUse();
+    protected abstract void ExitUse();
 }

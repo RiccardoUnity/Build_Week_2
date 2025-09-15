@@ -1,12 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "DoubleCoins", menuName = "PowerUps/DoubleCoins")]
 public class SO_DoubleCoins : SO_BasePowerUp
 {
-    public override void Use()
+    protected override void EnterUse()
+    {
+        CoinManager.Instance.ChangeDoubleCoins();
+    }
+
+    protected override void StayUse()
     {
 
+    }
+
+    protected override void ExitUse()
+    {
+        CoinManager.Instance.ChangeDoubleCoins();
     }
 }

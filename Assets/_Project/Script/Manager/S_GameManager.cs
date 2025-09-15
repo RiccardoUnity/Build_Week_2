@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace SGM
 {
     public enum Lane
@@ -14,6 +12,13 @@ namespace SGM
         DoubleCoin,
         Wings,
         SlowTime
+    }
+
+    public enum Level
+    {
+        One = 1,
+        Two = 2,
+        Three = 3
     }
 
     public static class S_GameManager

@@ -75,22 +75,22 @@ namespace SGM
     [System.Serializable]
     public class PowerUp
     {
-        private static int _doubleCoinsLevel;
-        public static int DoubleCoinsLevel
+        private int _doubleCoinsLevel;
+        public int DoubleCoinsLevel
         {
             get => _doubleCoinsLevel;
             private set => _doubleCoinsLevel = value;
         }
 
-        private static int _wingsLevel;
-        public static int WingsLevel
+        private int _wingsLevel;
+        public int WingsLevel
         {
             get => _wingsLevel;
             private set => _wingsLevel = value;
         }
 
-        private static int _slowTimeLevel;
-        public static int SlowTimeLevel
+        private int _slowTimeLevel;
+        public int SlowTimeLevel
         {
             get => _slowTimeLevel;
             private set => _slowTimeLevel = value;
