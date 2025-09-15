@@ -2,12 +2,14 @@ using SGM;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour
 {
     [Header("Player Settings")]
     public float forwardSpeed = 5f;
     private Rigidbody _rb;
+    private bool _isAlive = true;
 
     public float horizontalMultiplier = 2f;
     private float _horizontalInput;
@@ -41,12 +43,14 @@ public class PlayerController : MonoBehaviour
     public bool showGroundCheckGizmos = true;
     public bool showSlideColliderGizmos = false;
 
+    [Header("Unity Events")]
+    public UnityEvent lavaTouchedEvent;
+
     public bool IsJumping => _isJumping;
     public bool IsSliding => _isSliding;
+    public bool IsAlive => _isAlive;
 
     private PlayerAnimator _playerAnimator;
-    private const string hitTrigger = "hit";
-    private const string crashedTrigger = "crashed";
 
     private void Start()
     {
@@ -60,7 +64,10 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Move();
+        if (_isAlive)
+        {
+            Move();
+        }
     }
 
     private void Update()
@@ -79,6 +86,13 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Obstacles")) _playerAnimator.TriggerFallAnimation();
 
         if (collision.gameObject.layer == LayerMask.NameToLayer("Default")) _playerAnimator.TriggerCrashAnimation();
+
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Lava"))
+        {
+            _isAlive = false;
+            _playerAnimator.TriggerDeathAnimation();
+            lavaTouchedEvent.Invoke();
+        }
     }
 
     #region Move & Lane changing
@@ -127,7 +141,7 @@ public class PlayerController : MonoBehaviour
             _lastRunningSoundTime = Time.time;
         }
     }
-    
+
     private IEnumerator Slide() // <- gestisce la scivolata
     {
         if (_isSliding) yield break; // <- per prevenire slide multipli

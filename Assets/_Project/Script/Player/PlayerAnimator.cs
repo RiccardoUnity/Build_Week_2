@@ -12,6 +12,7 @@ public class PlayerAnimator : MonoBehaviour
     private const string slideTrigger = "slide";
     private const string fallTrigger = "fall";
     private const string crashedTrigger = "crashed";
+    private const string deadTrigger = "dead";
 
     private PlayerController _playerController;
     private bool _wasJumping = false;
@@ -51,5 +52,10 @@ public class PlayerAnimator : MonoBehaviour
     public void TriggerCrashAnimation()
     {
         _animator.SetTrigger(crashedTrigger);
+    }
+
+    public void TriggerDeathAnimation()
+    {
+        _animator.SetTrigger(deadTrigger);
     }
 }
