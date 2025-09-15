@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     private float _lastRunningSoundTime;
 
     [Header("Jump Settings")]
-    public float jumpForce = 3f;
+    public float jumpForce = 4f;
     private bool _isJumping = false;
 
     [Header("Slide Settings")]
