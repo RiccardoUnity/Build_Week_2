@@ -10,10 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 79a8f392982f3644ca37a478200d78b2, type: 3}
-  m_Name: Gun
+  m_Name: DoubleCoins 1
   m_EditorClassIdentifier: 
-  powerUpName: 
+  PowerUp: 0
+  powerUpName: Double Coin 1
   description: 
   icon: {fileID: 0}
   cost: 0
+  level: 0
+  inputKey: 0
   rechargeTime: 10

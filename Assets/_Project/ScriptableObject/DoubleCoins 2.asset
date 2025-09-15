@@ -9,11 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2cb6cc1ebc341ae44ab754f6c02b46e3, type: 3}
-  m_Name: JetPack
+  m_Script: {fileID: 11500000, guid: 79a8f392982f3644ca37a478200d78b2, type: 3}
+  m_Name: DoubleCoins 2
   m_EditorClassIdentifier: 
-  powerUpName: 
+  PowerUp: 0
+  powerUpName: Double Coin 2
   description: 
   icon: {fileID: 0}
   cost: 0
+  level: 1
+  inputKey: 0
   rechargeTime: 10
