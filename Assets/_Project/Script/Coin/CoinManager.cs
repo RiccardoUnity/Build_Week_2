@@ -24,4 +24,6 @@ public class CoinManager : MonoBehaviour
     public int GetPlayerLayerMask() => _playerLayerMask.value;
 
     public void CoinPickUp() => _coinPickUp++;
+
+    public int GetCoinPickUp() => _coinPickUp;
 }
