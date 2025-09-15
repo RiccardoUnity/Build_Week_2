@@ -182,7 +182,7 @@ public class PlayerController : MonoBehaviour
     {
         bool wasGrounded = _isGrounded;
         _isGrounded = Physics.CheckSphere(transform.position + Vector3.down * groundCheckOffset, 0.2f, groundLayerMask);
-        if (!wasGrounded && _isGrounded && _isJumping) _isJumping = false; // <- se il player è appena atterrato, smette di considerarlo in salto
+        if (!wasGrounded && _isGrounded && _isJumping) _isJumping = false; // <- se il player ï¿½ appena atterrato, smette di considerarlo in salto
     }
 
     private void OnDrawGizmosSelected() // <- disegna un gizmo relativo alla check sphere e al collider del player (utile per capire come si comporta durante lo slide)

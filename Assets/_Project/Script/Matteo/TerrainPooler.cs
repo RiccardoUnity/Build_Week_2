@@ -14,80 +14,90 @@ public class TerrainPooler : MonoBehaviour
     private Queue<GameObject> poolB = new Queue<GameObject>();
     private Queue<GameObject> poolC = new Queue<GameObject>();
 
-    private Transform player;
-    private float nextSpawnZ;
+    private float nextSpawnZ = 0f;
 
-    [SerializeField] private bool useSecondPool = false;
-    [SerializeField] private bool useThirdPool = false;
+    private int consecutiveCount = 0;
+    private int currentPoolIndex = 0;
 
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-        nextSpawnZ = 0f;
-
-        // Inizializza Pool A
+        // Inizializza pool iniziale
         for (int i = 0; i < poolSize; i++)
         {
             GameObject segmentA = Instantiate(terrainPrefabA, new Vector3(0, 0, nextSpawnZ), Quaternion.identity);
             poolA.Enqueue(segmentA);
             nextSpawnZ += segmentLength;
+            consecutiveCount++;
         }
 
-        // Inizializza Pool B 
+        // Inizializza pool B (fuori vista)
         for (int i = 0; i < poolSize; i++)
         {
-            GameObject segmentB = Instantiate(terrainPrefabB, new Vector3(0, -1000, 0), Quaternion.identity); // Fuori vista
+            GameObject segmentB = Instantiate(terrainPrefabB, new Vector3(0, -1000, 0), Quaternion.identity);
             poolB.Enqueue(segmentB);
         }
 
-        // Inizializza Pool C
+        // Inizializza pool C (fuori vista)
         for (int i = 0; i < poolSize; i++)
         {
-            GameObject segmentC = Instantiate(terrainPrefabC, new Vector3(0, -1000, 0), Quaternion.identity); // Fuori vista
+            GameObject segmentC = Instantiate(terrainPrefabC, new Vector3(0, -1000, 0), Quaternion.identity);
             poolC.Enqueue(segmentC);
         }
     }
 
     public void SpawnNextSegment()
     {
+    
+        if (consecutiveCount >= 5)
+        {
+            int newPool = GetRandomOtherPool(currentPoolIndex);
+            currentPoolIndex = newPool;
+            consecutiveCount = 0;
+        }
+
+        GameObject segment = GetSegmentFromPool(currentPoolIndex);
+        segment.transform.position = new Vector3(0, 0, nextSpawnZ);
+        nextSpawnZ += segmentLength;
+
+        consecutiveCount++;
+    }
+
+    private GameObject GetSegmentFromPool(int poolIndex)
+    {
         GameObject segment;
 
-        if (!useSecondPool && !useThirdPool)
+        switch (poolIndex)
         {
-            segment = poolA.Dequeue();
-            segment.transform.position = new Vector3(0, 0, nextSpawnZ);
-            poolA.Enqueue(segment);
-        }
-        else if (useSecondPool && !useThirdPool)
-        {
-            segment = poolB.Dequeue();
-            segment.transform.position = new Vector3(0, 0, nextSpawnZ);
-            poolB.Enqueue(segment);
-        }
-        else if (useThirdPool)
-        {
-            segment = poolC.Dequeue();
-            segment.transform.position = new Vector3(0, 0, nextSpawnZ);
-            poolC.Enqueue(segment);
-        }
-        else
-        {
-            Debug.LogWarning("Nessun pool attivo!");
-            return;
+            case 0:
+                segment = poolA.Dequeue();
+                poolA.Enqueue(segment);
+                break;
+            case 1:
+                segment = poolB.Dequeue();
+                poolB.Enqueue(segment);
+                break;
+            case 2:
+                segment = poolC.Dequeue();
+                poolC.Enqueue(segment);
+                break;
+            default:
+                Debug.LogWarning("Pool index non valido, uso pool A");
+                segment = poolA.Dequeue();
+                poolA.Enqueue(segment);
+                break;
         }
 
-        nextSpawnZ += segmentLength;
+        return segment;
     }
 
-    public void SwitchToSecondPool()
+    private int GetRandomOtherPool(int exclude)
     {
-        useSecondPool = true;
-        useThirdPool = false;
-    }
+        List<int> otherPools = new List<int>();
 
-    public void SwitchToThirdPool()
-    {
-        useSecondPool = false;
-        useThirdPool = true;
+        if (exclude != 0) otherPools.Add(0);
+        if (exclude != 1) otherPools.Add(1);
+        if (exclude != 2) otherPools.Add(2);
+
+        return otherPools[Random.Range(0, otherPools.Count)];
     }
 }
