@@ -44,6 +44,10 @@ public class PlayerController : MonoBehaviour
     public bool IsJumping => _isJumping;
     public bool IsSliding => _isSliding;
 
+    private PlayerAnimator _playerAnimator;
+    private const string hitTrigger = "hit";
+    private const string crashedTrigger = "crashed";
+
     private void Start()
     {
         _rb = GetComponent<Rigidbody>();
@@ -51,6 +55,7 @@ public class PlayerController : MonoBehaviour
 
         _capsule = GetComponent<CapsuleCollider>();
         _originalColliderHeight = _capsule.height;
+        _playerAnimator = GetComponentInChildren<PlayerAnimator>();
     }
 
     private void FixedUpdate()
@@ -69,13 +74,20 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.W) && _isGrounded) Jump();
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Obstacles")) _playerAnimator.TriggerFallAnimation();
+
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Default")) _playerAnimator.TriggerCrashAnimation();
+    }
+
     #region Move & Lane changing
     private void Move() // <- gestisce il movimento continuo del Player
     {
         _horizontalInput = Input.GetAxis("Horizontal");
 
         Vector3 fwdMove = transform.forward * (forwardSpeed * Time.fixedDeltaTime);
-        Vector3 horMove = transform.right * (_horizontalInput * horizontalMultiplier) * (forwardSpeed * Time.fixedDeltaTime);
+        Vector3 horMove = transform.right * (_horizontalInput * horizontalMultiplier) * (forwardSpeed * S_GameManager.Difficulty * Time.fixedDeltaTime);
 
         _rb.MovePosition(_rb.position + fwdMove + horMove);
 
