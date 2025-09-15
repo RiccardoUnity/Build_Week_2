@@ -9,6 +9,13 @@ namespace SGM
         Right
     }
 
+    public enum PowerUpType
+    {
+        DoubleCoin,
+        Wings,
+        SlowTime
+    }
+
     public static class S_GameManager
     {
         #region Coin Logic

@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using System.Collections;
+using SGM;
 
 public enum Key
 {
@@ -16,17 +17,10 @@ public enum Level
     Three
 }
 
-public enum PowerUp
-{
-    DoubleCoin,
-    Wings,
-    SlowTime
-}
-
 public abstract class SO_BasePowerUp : ScriptableObject
 {
     [Header("Informazioni Base PowerUp")]
-    public PowerUp PowerUp;
+    public PowerUpType PowerUp;
     public string powerUpName;
     [TextArea(3, 5)]
     public string description;

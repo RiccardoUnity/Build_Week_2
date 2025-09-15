@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using Newtonsoft.Json;
 using System.IO;
+using UnityEngine;
 
 namespace SGM
 {
@@ -74,6 +72,62 @@ namespace SGM
         }
     }
 
+    [System.Serializable]
+    public class PowerUp
+    {
+        private static int _doubleCoinsLevel;
+        public static int DoubleCoinsLevel
+        {
+            get => _doubleCoinsLevel;
+            private set => _doubleCoinsLevel = value;
+        }
+
+        private static int _wingsLevel;
+        public static int WingsLevel
+        {
+            get => _wingsLevel;
+            private set => _wingsLevel = value;
+        }
+
+        private static int _slowTimeLevel;
+        public static int SlowTimeLevel
+        {
+            get => _slowTimeLevel;
+            private set => _slowTimeLevel = value;
+        }
+
+        public PowerUp()
+        {
+            DoubleCoinsLevel = 0;
+            WingsLevel = 0;
+            SlowTimeLevel = 0;
+        }
+
+        public PowerUp(int doubleCoins, int wings, int slowTimeLevel)
+        {
+            DoubleCoinsLevel = doubleCoins;
+            WingsLevel = wings;
+            SlowTimeLevel = slowTimeLevel;
+        }
+
+        public void IncreasePowerUp(PowerUpType powerUpType)
+        {
+            switch (powerUpType)
+            {
+                case PowerUpType.DoubleCoin:
+                    ++DoubleCoinsLevel;
+                    break;
+                case PowerUpType.Wings:
+                    ++WingsLevel;
+                    break;
+                case PowerUpType.SlowTime:
+                    ++SlowTimeLevel;
+                    break;
+            }
+            S_SaveManager.SavePowerUp();
+        }
+    }
+
     public static class S_SaveManager
     {
         #region Option
@@ -92,7 +146,7 @@ namespace SGM
         #endregion
 
         #region Leaderboard
-        private static string _path = Application.persistentDataPath + "/leaderboard.txt";
+        private static string _pathLeaderboard = Application.persistentDataPath + "/leaderboard.txt";
 
         public static Leaderboard ResetLeaderboard()
         {
@@ -100,7 +154,7 @@ namespace SGM
             {
                 Leaderboard leaderboard = new Leaderboard();
                 string stringLeaderboard = JsonConvert.SerializeObject(leaderboard, Formatting.Indented);
-                File.WriteAllText(_path, stringLeaderboard);
+                File.WriteAllText(_pathLeaderboard, stringLeaderboard);
                 return leaderboard;
             }
             catch
@@ -112,19 +166,19 @@ namespace SGM
 
         public static Leaderboard GetLeaderboard()
         {
-            if (File.Exists(_path))
+            if (File.Exists(_pathLeaderboard))
             {
                 try
                 {
                     string stringLeaderboard;
                     Leaderboard leaderboard;
-                    stringLeaderboard = File.ReadAllText(_path);
+                    stringLeaderboard = File.ReadAllText(_pathLeaderboard);
                     leaderboard = JsonConvert.DeserializeObject<Leaderboard>(stringLeaderboard);
                     return leaderboard;
                 }
                 catch
                 {
-                    Debug.LogError("Qualcosa nella lettura del file di salvataggio è andata ESTREMAMENTE storta");
+                    Debug.LogError("Qualcosa è andato ESTREMAMENTE storto nella lettura della Leaderboard");
                     return null;
                 }
             }
@@ -148,9 +202,51 @@ namespace SGM
             }
 
             string stringLeaderboard = JsonConvert.SerializeObject(leaderboard, Formatting.Indented);
-            File.WriteAllText(_path, stringLeaderboard);
+            File.WriteAllText(_pathLeaderboard, stringLeaderboard);
+        }
+        #endregion
+
+        #region PowerUp
+        public static PowerUp powerUp;
+
+        private static string _pathPowerUp = Application.persistentDataPath + "/powerUp.txt";
+
+        public static void ResetPowerUp()
+        {
+            powerUp = new PowerUp();
+            string stringPowerUp = JsonConvert.SerializeObject(powerUp);
+            File.WriteAllText(_pathPowerUp, stringPowerUp);
         }
 
+        public static PowerUp GetPowerUp()
+        {
+            if (powerUp == null)
+            {
+                if (File.Exists(_pathPowerUp))
+                {
+                    try
+                    {
+                        string stringPowerUp = File.ReadAllText(_pathPowerUp);
+                        powerUp = JsonConvert.DeserializeObject<PowerUp>(stringPowerUp);
+                    }
+                    catch
+                    {
+                        Debug.LogError("Qualcosa è andato ESTREMAMENTE storto nella lettura dei PowerUp");
+                    }
+                }
+                else
+                {
+                    ResetPowerUp();
+                }
+            }
+            return powerUp;
+        }
+
+        public static void SavePowerUp()
+        {
+            string stringPowerUp = JsonConvert.SerializeObject(powerUp, Formatting.Indented);
+            File.WriteAllText(_pathPowerUp, stringPowerUp);
+        }
         #endregion
     }
 }
