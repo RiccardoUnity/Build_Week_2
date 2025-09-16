@@ -362,8 +362,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278198525
-  m_fontColor: {r: 0.990566, g: 0.123637296, b: 0, a: 1}
+    rgba: 4283605751
+  m_fontColor: {r: 0.96862745, g: 0.63529414, b: 0.32156864, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2931,7 +2931,6 @@ MonoBehaviour:
   _EffectsSlider: {fileID: 7528898767792882034}
   _MusicSlider: {fileID: 7626419422165431964}
   _AudioMixer: {fileID: 24100000, guid: 7001d4a0936b24b50afc44c674d06e99, type: 2}
-  _MainLight: {fileID: 0}
   _BrightnessOverlay: {fileID: 4794025419318187487}
 --- !u!114 &493674618051103697
 MonoBehaviour:
@@ -3140,7 +3139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.1882353, g: 0.09019608, b: 0.21960784, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

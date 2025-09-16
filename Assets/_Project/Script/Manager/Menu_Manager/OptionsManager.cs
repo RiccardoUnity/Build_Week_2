@@ -24,8 +24,9 @@ public class OptionsManager : MonoBehaviour
 
         if (_BrightnessSlider != null)
         {
-            _BrightnessSlider.value = SGM.S_SaveManager.GetBrightness();
             _BrightnessSlider.onValueChanged.AddListener(ChangeBrightness);
+            _BrightnessSlider.value = SGM.S_SaveManager.GetBrightness();
+
         }
 
         if (_BrightnessOverlay != null)
@@ -35,14 +36,16 @@ public class OptionsManager : MonoBehaviour
 
         if (_MusicSlider != null)
         {
-            _MusicSlider.value = SGM.S_SaveManager.GetMusic();
             _MusicSlider.onValueChanged.AddListener(ChangeMusicVolume);
+            _MusicSlider.value = SGM.S_SaveManager.GetMusic();
+
         }
 
         if (_EffectsSlider != null)
         {
-            _EffectsSlider.value = SGM.S_SaveManager.GetEffects();
             _EffectsSlider.onValueChanged.AddListener(ChangeEffectsVolume);
+            _EffectsSlider.value = SGM.S_SaveManager.GetEffects();
+
         }
     }
 
@@ -55,13 +58,13 @@ public class OptionsManager : MonoBehaviour
     }
     public void ChangeMusicVolume(float Value)
     {
-        float dB = Mathf.Lerp(0, -80f, Value);
+        float dB = Mathf.Lerp(0, -24f, Value);
         _AudioMixer.SetFloat("MusicVolume", dB);
         SGM.S_SaveManager.SaveMusic(_MusicSlider.value);
     }
     public void ChangeEffectsVolume(float Value)
     {
-        float dB = Mathf.Lerp(0f, -80f, Value);
+        float dB = Mathf.Lerp(0f, -24f, Value);
         _AudioMixer.SetFloat("EffectsVolume", dB);
         SGM.S_SaveManager.SaveEffects(_EffectsSlider.value);
     }
