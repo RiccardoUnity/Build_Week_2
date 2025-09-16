@@ -17,7 +17,6 @@ public class OptionsManager : MonoBehaviour
     [SerializeField] AudioMixer _AudioMixer;
 
     [Header("Light")]
-    [SerializeField] Light _MainLight;
     [SerializeField] Image _BrightnessOverlay;
 
     void Start()
@@ -29,7 +28,7 @@ public class OptionsManager : MonoBehaviour
             _BrightnessSlider.onValueChanged.AddListener(ChangeBrightness);
         }
 
-        if (_BrightnessOverlay != null || _MainLight != null)
+        if (_BrightnessOverlay != null)
         {
             ChangeBrightness(_BrightnessSlider.value);
         }
@@ -52,7 +51,6 @@ public class OptionsManager : MonoBehaviour
         Color c = _BrightnessOverlay.color;
         c.a = Mathf.Clamp01(Value);
         _BrightnessOverlay.color = c;
-        _MainLight.intensity = Value;
         SGM.S_SaveManager.SaveBrightness(_BrightnessSlider.value);
     }
     public void ChangeMusicVolume(float Value)
