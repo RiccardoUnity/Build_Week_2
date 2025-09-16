@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2037917023539534418}
   - component: {fileID: 5322569101139584027}
   - component: {fileID: 7522609902149022605}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DunaOstacolo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,5 +103,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10, y: 1.2, z: 20}
+  m_Size: {x: 10, y: 1.2, z: 9.847734}
   m_Center: {x: 0, y: 0.59000015, z: 0}

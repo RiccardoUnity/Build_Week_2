@@ -92,7 +92,7 @@ public class PlayerController : MonoBehaviour
             PlayerDead();
         }
 
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Default"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("High Obstacles"))
         {
             _playerAnimator.TriggerCrashAnimation();
             PlayerDead();
@@ -110,8 +110,8 @@ public class PlayerController : MonoBehaviour
     {
         _horizontalInput = Input.GetAxis("Horizontal");
 
-        Vector3 fwdMove = transform.forward * (forwardSpeed * Time.fixedDeltaTime);
-        Vector3 horMove = transform.right * (_horizontalInput * horizontalMultiplier) * (forwardSpeed * S_GameManager.Difficulty() * Time.fixedDeltaTime);
+        Vector3 fwdMove = transform.forward * (forwardSpeed * S_GameManager.Difficulty() * Time.fixedDeltaTime);
+        Vector3 horMove = transform.right * (_horizontalInput * horizontalMultiplier) * (forwardSpeed * Time.fixedDeltaTime);
 
         _rb.MovePosition(_rb.position + fwdMove + horMove);
 
