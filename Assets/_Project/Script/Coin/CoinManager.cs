@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 //Singleton molto semplice
 //Chiamare da Start in poi
@@ -10,6 +11,8 @@ public class CoinManager : MonoBehaviour
     private int _coinPickUp;
 
     private bool _isDoubleCoins;
+
+    public UnityEvent<int> onCoinPickUp;
 
     void Awake()
     {
@@ -37,6 +40,7 @@ public class CoinManager : MonoBehaviour
         {
             _coinPickUp += 2;
         }
+        onCoinPickUp?.Invoke(_coinPickUp);
     }
 
     public int GetCoinPickUp() => _coinPickUp;
