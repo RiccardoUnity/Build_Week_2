@@ -110,8 +110,13 @@ public class PlayerController : MonoBehaviour
     {
         _horizontalInput = Input.GetAxis("Horizontal");
 
+        float forcedHorizontalInput = _horizontalInput;
+
+        if (_laneInput == 0 && _horizontalInput < 0) forcedHorizontalInput = 0; // <- corsia sinistra, input sinistra
+        if (_laneInput == 2 && _horizontalInput > 0) forcedHorizontalInput = 0; // <- corsia destra, input destra
+
         Vector3 fwdMove = transform.forward * (forwardSpeed * S_GameManager.Difficulty() * Time.fixedDeltaTime);
-        Vector3 horMove = transform.right * (_horizontalInput * horizontalMultiplier) * (forwardSpeed * Time.fixedDeltaTime);
+        Vector3 horMove = transform.right * (forcedHorizontalInput * horizontalMultiplier) * (forwardSpeed * Time.fixedDeltaTime);
 
         _rb.MovePosition(_rb.position + fwdMove + horMove);
 
