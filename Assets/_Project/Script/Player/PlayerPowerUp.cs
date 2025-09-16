@@ -6,6 +6,7 @@ using Save = SGM.S_SaveManager;
 public class PlayerPowerUp : MonoBehaviour
 {
     private PlayerController _playercontroller;
+    public PlayerController GetPlayerController() => _playercontroller;
 
     [SerializeField] SO_DoubleCoins[] _doubleCoins;
     public UnityEvent doubleCoinsEvent;

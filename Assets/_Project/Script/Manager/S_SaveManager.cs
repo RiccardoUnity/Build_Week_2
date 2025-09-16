@@ -10,7 +10,7 @@ namespace SGM
         private const int _maxPosition = 5;
         public static int GetMaxPosition() => _maxPosition;
 
-        private int[] _position = new int[_maxPosition];
+        [JsonProperty] private int[] _position = new int[_maxPosition];
 
         public Leaderboard(int[] position)
         {
@@ -166,6 +166,7 @@ namespace SGM
 
         public static Leaderboard GetLeaderboard()
         {
+            Debug.Log(_pathLeaderboard);
             if (File.Exists(_pathLeaderboard))
             {
                 try
@@ -222,22 +223,24 @@ namespace SGM
         {
             if (powerUp == null)
             {
-                if (File.Exists(_pathPowerUp))
+                powerUp = new PowerUp();
+            }
+
+            if (File.Exists(_pathPowerUp))
+            {
+                try
                 {
-                    try
-                    {
-                        string stringPowerUp = File.ReadAllText(_pathPowerUp);
-                        powerUp = JsonConvert.DeserializeObject<PowerUp>(stringPowerUp);
-                    }
-                    catch
-                    {
-                        Debug.LogError("Qualcosa è andato ESTREMAMENTE storto nella lettura dei PowerUp");
-                    }
+                    string stringPowerUp = File.ReadAllText(_pathPowerUp);
+                    powerUp = JsonConvert.DeserializeObject<PowerUp>(stringPowerUp);
                 }
-                else
+                catch
                 {
-                    ResetPowerUp();
+                    Debug.LogError("Qualcosa è andato ESTREMAMENTE storto nella lettura dei PowerUp");
                 }
+            }
+            else
+            {
+                ResetPowerUp();
             }
             return powerUp;
         }
