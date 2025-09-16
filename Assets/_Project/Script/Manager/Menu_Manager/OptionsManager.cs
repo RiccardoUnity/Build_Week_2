@@ -52,7 +52,9 @@ public class OptionsManager : MonoBehaviour
     public void ChangeBrightness(float Value)
     {
         Color c = _BrightnessOverlay.color;
-        c.a = Mathf.Clamp01(Value);
+        float minBrightness = 0.2f;
+        float maxBrightness = 0.8f;
+        c.a = Mathf.Clamp(Value, minBrightness, maxBrightness);
         _BrightnessOverlay.color = c;
         SGM.S_SaveManager.SaveBrightness(_BrightnessSlider.value);
     }

@@ -738,6 +738,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6569747126478294650}
   - component: {fileID: 6718590953816684955}
+  - component: {fileID: 5538003305850408754}
   m_Layer: 0
   m_Name: ---UIinGame---
   m_TagString: Untagged
@@ -776,6 +777,19 @@ MonoBehaviour:
   _mainMenuScene: {fileID: 0}
   _optionMenuScene: {fileID: 0}
   _shopMenuScene: {fileID: 0}
+--- !u!114 &5538003305850408754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8477507095725946024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f349aa4742cf426292c83a636383144, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  punteggioText: {fileID: 6243492618266309745}
 --- !u!1 &8920975420303052054
 GameObject:
   m_ObjectHideFlags: 0
