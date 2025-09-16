@@ -67,6 +67,8 @@ public class PlayerController : MonoBehaviour
         if (_isAlive)
         {
             Move();
+
+            ChangeLane();
         }
     }
 
@@ -74,8 +76,6 @@ public class PlayerController : MonoBehaviour
     {
         if(_isAlive)
         {
-            ChangeLane();
-
             GroundChecker();
 
             if (Input.GetKeyDown(KeyCode.S)) StartCoroutine(Slide());
@@ -143,7 +143,7 @@ public class PlayerController : MonoBehaviour
         else if (_laneInput == 1) newPos.x = 0f;
         else if (_laneInput == 2) newPos.x = onLaneDistance;
 
-        transform.position = Vector3.Lerp(transform.position, newPos, laneMultiplier * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, newPos, laneMultiplier * Time.fixedDeltaTime);
     }
     #endregion
 
