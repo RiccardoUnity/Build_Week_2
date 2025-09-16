@@ -17,20 +17,20 @@ public abstract class SO_BasePowerUp : ScriptableObject
     public float rechargeTime = 10f;
     IEnumerator timer;
 
-    public IEnumerator Timer() // <- coroutine per il timer di ricarica
+    public IEnumerator Timer(PlayerPowerUp player) // <- coroutine per il timer di ricarica
     {
-        float timer = rechargeTime;
+        float timer = rechargeTime * (int)level;
         Debug.Log($"Iniziando ricarica per {powerUpName} - {timer} secondi");
 
-        EnterUse();
+        EnterUse(player);
         while (timer > 0)
         {
             timer -= Time.deltaTime;
             yield return null;
-            StayUse();
+            StayUse(player);
         }
         yield return null;
-        ExitUse();
+        ExitUse(player);
         Debug.Log($"Ricarica completata per {powerUpName}");
     }
 
@@ -38,12 +38,12 @@ public abstract class SO_BasePowerUp : ScriptableObject
     {
         if (timer != null)
         {
-            timer = Timer();
+            timer = Timer(player);
             player.StartCoroutine(timer);
         }
     }
 
-    protected abstract void EnterUse();
-    protected abstract void StayUse();
-    protected abstract void ExitUse();
+    protected abstract void EnterUse(PlayerPowerUp player);
+    protected abstract void StayUse(PlayerPowerUp player);
+    protected abstract void ExitUse(PlayerPowerUp player);
 }

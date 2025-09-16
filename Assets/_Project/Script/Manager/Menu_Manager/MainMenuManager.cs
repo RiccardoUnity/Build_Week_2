@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using SGM;
 public class MainMenuManager : MonoBehaviour
 {
     [SerializeField] GameObject _mainMenuScene;
@@ -15,6 +15,7 @@ public class MainMenuManager : MonoBehaviour
         _mainMenuScene.SetActive(true);
         _optionMenuScene.SetActive(false);
         _shopMenuScene.SetActive(false);
+        SGM.S_SaveManager.GetLeaderboard();
     }
 
     public void OnButtonClick(string menuName)
@@ -39,8 +40,6 @@ public class MainMenuManager : MonoBehaviour
     public void SoundOnClick(AudioSource audioSource)
     {
         audioSource.Play();
-
-
     }
     public void SceneLoader(string _SceneName)
     {
