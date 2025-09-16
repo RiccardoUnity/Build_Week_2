@@ -2945,7 +2945,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75400bd13e5334589acdc2d2183661d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leaderboardTexts:
+  _leaderboardTexts:
   - {fileID: 5485047062545786022}
   - {fileID: 6416407428530545338}
   - {fileID: 8986692993358238232}
