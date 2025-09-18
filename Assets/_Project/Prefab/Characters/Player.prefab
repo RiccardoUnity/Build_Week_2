@@ -101,7 +101,7 @@ MonoBehaviour:
   forwardSpeed: 5
   horizontalMultiplier: 2
   onLaneDistance: 2
-  laneMultiplier: 80
+  laneMultiplier: 120
   runningSoundInterval: 0.5
   jumpForce: 4
   slideDuration: 1

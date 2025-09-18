@@ -230,20 +230,17 @@ namespace SGM
             {
                 try
                 {
-<<<<<<< Updated upstream
                     string stringPowerUp = File.ReadAllText(_pathPowerUp);
                     powerUp = JsonConvert.DeserializeObject<PowerUp>(stringPowerUp);
-=======
                     try
                     {
-                        string stringPowerUp = File.ReadAllText(_pathPowerUp);
+                        //string stringPowerUp = File.ReadAllText(_pathPowerUp);
                         powerUp = JsonConvert.DeserializeObject<PowerUp>(stringPowerUp);
                     }
                     catch
                     {
                         Debug.LogError("Qualcosa � andato ESTREMAMENTE storto nella lettura dei PowerUp");
                     }
->>>>>>> Stashed changes
                 }
                 catch
                 {
