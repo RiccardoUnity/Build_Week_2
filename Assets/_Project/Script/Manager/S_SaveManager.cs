@@ -135,14 +135,18 @@ namespace SGM
         private static string _music = "music";
         private static string _brightness = "brightness";
         private static float _defaultValue = 0.5f;
+        private static string _coin = "coin";
+        private static int _defaultCoin = 0;
 
         public static float GetEffects() => PlayerPrefs.GetFloat(_effects, _defaultValue);
         public static float GetMusic() => PlayerPrefs.GetFloat(_music, _defaultValue);
         public static float GetBrightness() => PlayerPrefs.GetFloat(_brightness, _defaultValue);
+        public static int GetCoin() => PlayerPrefs.GetInt(_coin, _defaultCoin);
 
         public static void SaveEffects(float value) => PlayerPrefs.SetFloat(_effects, value);
         public static void SaveMusic(float value) => PlayerPrefs.SetFloat(_music, value);
         public static void SaveBrightness(float value) => PlayerPrefs.SetFloat(_brightness, value);
+        public static void SaveCoin(int value) => PlayerPrefs.SetInt(_coin, value);
         #endregion
 
         #region Leaderboard
