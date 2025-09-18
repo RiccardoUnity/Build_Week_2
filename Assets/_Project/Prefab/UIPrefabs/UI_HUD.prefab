@@ -50,7 +50,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2014ba15e6f5b8344af31f843d4f5ce1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coinManager: {fileID: 0}
   _coinText: {fileID: 4191298102125092593}
 --- !u!1 &1295885427184089829
 GameObject:
