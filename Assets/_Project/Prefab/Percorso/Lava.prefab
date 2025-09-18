@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2998314908435690979}
   - component: {fileID: 2928708931975725618}
   - component: {fileID: 8972827692188598112}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Point Light (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 4518748308012099543}
   - component: {fileID: 8999474537675748697}
   - component: {fileID: 6590753901573666256}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: Lava
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -237,7 +237,7 @@ GameObject:
   - component: {fileID: 3732080845721933518}
   - component: {fileID: 8954813704693371234}
   - component: {fileID: 4697987688562264551}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -355,7 +355,7 @@ GameObject:
   - component: {fileID: 8366914098715327127}
   - component: {fileID: 9114353791695657027}
   - component: {fileID: 5891276451984390869}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Point Light (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
