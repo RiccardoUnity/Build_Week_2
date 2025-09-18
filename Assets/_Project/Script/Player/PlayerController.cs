@@ -75,10 +75,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_isAlive)
-        {
-            Move();
-        }
+        if (_isAlive) Move();
     }
 
     private void Update()
@@ -333,8 +330,6 @@ public class PlayerController : MonoBehaviour
 
         groundCheckOffset = _originalGroundCheckOffset; // <- ripristina il ground check offset originale
 
-
-        // Reset delle variabili
         _isUsingWings = false;
         _wingsTransitionInProgress = false;
     }

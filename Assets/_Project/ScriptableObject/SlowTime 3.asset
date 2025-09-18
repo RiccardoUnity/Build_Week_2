@@ -16,7 +16,7 @@ MonoBehaviour:
   powerUpName: SlowTime 3
   description: 
   icon: {fileID: 0}
-  cost: 0
-  level: 2
-  inputKey: 2
-  rechargeTime: 10
+  cost: 210
+  level: 3
+  rechargeTime: 7
+  _slowTime: 0.75

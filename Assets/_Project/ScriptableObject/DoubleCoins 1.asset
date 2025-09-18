@@ -16,7 +16,6 @@ MonoBehaviour:
   powerUpName: Double Coin 1
   description: 
   icon: {fileID: 0}
-  cost: 0
-  level: 0
-  inputKey: 0
-  rechargeTime: 10
+  cost: 90
+  level: 1
+  rechargeTime: 29
