@@ -75,21 +75,21 @@ namespace SGM
     [System.Serializable]
     public class PowerUp
     {
-        private int _doubleCoinsLevel;
+        [JsonProperty] private int _doubleCoinsLevel;
         public int DoubleCoinsLevel
         {
             get => _doubleCoinsLevel;
             private set => _doubleCoinsLevel = value;
         }
 
-        private int _wingsLevel;
+        [JsonProperty] private int _wingsLevel;
         public int WingsLevel
         {
             get => _wingsLevel;
             private set => _wingsLevel = value;
         }
 
-        private int _slowTimeLevel;
+        [JsonProperty] private int _slowTimeLevel;
         public int SlowTimeLevel
         {
             get => _slowTimeLevel;
@@ -146,7 +146,7 @@ namespace SGM
         public static void SaveEffects(float value) => PlayerPrefs.SetFloat(_effects, value);
         public static void SaveMusic(float value) => PlayerPrefs.SetFloat(_music, value);
         public static void SaveBrightness(float value) => PlayerPrefs.SetFloat(_brightness, value);
-        public static void SaveCoin(int value) => PlayerPrefs.SetInt(_coin, value);
+        public static void SaveCoin(int value) => PlayerPrefs.SetInt(_coin, GetCoin() + value);
         #endregion
 
         #region Leaderboard
@@ -236,15 +236,6 @@ namespace SGM
                 {
                     string stringPowerUp = File.ReadAllText(_pathPowerUp);
                     powerUp = JsonConvert.DeserializeObject<PowerUp>(stringPowerUp);
-                    try
-                    {
-                        //string stringPowerUp = File.ReadAllText(_pathPowerUp);
-                        powerUp = JsonConvert.DeserializeObject<PowerUp>(stringPowerUp);
-                    }
-                    catch
-                    {
-                        Debug.LogError("Qualcosa � andato ESTREMAMENTE storto nella lettura dei PowerUp");
-                    }
                 }
                 catch
                 {

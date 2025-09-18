@@ -1,5 +1,6 @@
-using UnityEngine;
 using SGM;
+using System.Collections;
+using UnityEngine;
 using Name = SGM.S_GameManager;
 
 public class CoinPointSpawn : MonoBehaviour
@@ -24,6 +25,15 @@ public class CoinPointSpawn : MonoBehaviour
         {
             _lane = Lane.Right;
         }
+
+        StartCoroutine(EnableCollider());
+    }
+
+    IEnumerator EnableCollider()
+    {
+        yield return null;
+        GetComponent<SphereCollider>().enabled = true;
+        Debug.Log("Qui");
     }
 
     public Lane GetLane() => _lane;

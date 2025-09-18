@@ -32,6 +32,7 @@ public class PlayerPowerUp : MonoBehaviour
                 {
                     if ((int)powerUp.level == Save.powerUp.DoubleCoinsLevel)
                     {
+                        Debug.Log("PowerUp in uso DoubleCoins");
                         powerUp.Use(this);
                         DoubleCoinsEvent();
                     }
@@ -43,6 +44,7 @@ public class PlayerPowerUp : MonoBehaviour
                 {
                     if ((int)powerUp.level == Save.powerUp.WingsLevel)
                     {
+                        Debug.Log("PowerUp in uso Wings");
                         powerUp.Use(this);
                         WingsEvent();
                     }
@@ -54,6 +56,7 @@ public class PlayerPowerUp : MonoBehaviour
                 {
                     if ((int)powerUp.level == Save.powerUp.SlowTimeLevel)
                     {
+                        Debug.Log("PowerUp in uso SlowTime");
                         powerUp.Use(this);
                         SlowTimeEvent();
                     }
