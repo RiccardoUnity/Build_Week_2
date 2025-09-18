@@ -33,15 +33,6 @@ public class PlayerController : MonoBehaviour
     private float _colliderResize = .7f;
     private CapsuleCollider _capsule;
 
-    [Header("Wings PowerUp Settings")]
-    public float wingsHeight = 5f;
-    public float wingsTransitionSpeed = 3f;
-    private bool _isUsingWings = false;
-    private Vector3 _originalPosition;
-    private float _originalGroundCheckOffset;
-    private bool _wingsTransitionInProgress = false;
-
-
     [Header("Ground Check Settings")]
     public LayerMask groundLayerMask = 5;
     public float groundCheckOffset = 1.01f;
@@ -58,8 +49,6 @@ public class PlayerController : MonoBehaviour
     public bool IsJumping => _isJumping;
     public bool IsSliding => _isSliding;
     public bool IsAlive => _isAlive;
-    public bool IsUsingWings => _isUsingWings;
-    public bool WingsTransitionInProgress => _wingsTransitionInProgress;
 
     private PlayerAnimator _playerAnimator;
 
@@ -78,6 +67,8 @@ public class PlayerController : MonoBehaviour
         if (_isAlive)
         {
             Move();
+
+            ChangeLane();
         }
     }
 
@@ -85,8 +76,6 @@ public class PlayerController : MonoBehaviour
     {
         if(_isAlive)
         {
-            ChangeLane();
-
             GroundChecker();
 
             if (Input.GetKeyDown(KeyCode.S)) StartCoroutine(Slide());
@@ -154,7 +143,7 @@ public class PlayerController : MonoBehaviour
         else if (_laneInput == 1) newPos.x = 0f;
         else if (_laneInput == 2) newPos.x = onLaneDistance;
 
-        transform.position = Vector3.Lerp(transform.position, newPos, laneMultiplier * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, newPos, laneMultiplier * Time.fixedDeltaTime);
     }
     #endregion
 
@@ -241,102 +230,6 @@ public class PlayerController : MonoBehaviour
     {
         _isAlive = false;
         playerDeadEvent.Invoke();
-    }
-    #endregion
-
-    #region Wings PowerUp
-    public void EnterWings()
-    {
-        if (_isUsingWings || _wingsTransitionInProgress) return; // <- per prevenire attivazioni multiple
-
-        _isUsingWings = true;
-        _wingsTransitionInProgress = true;
-
-        _originalPosition = transform.position;
-        _originalGroundCheckOffset = groundCheckOffset;
-
-        _rb.isKinematic = true;
-
-        _rb.velocity = Vector3.zero;
-        _rb.angularVelocity = Vector3.zero;
-
-        StartCoroutine(MoveUp()); // <- inizia la coroutine per il movimento verso l'alto
-
-        groundCheckOffset = _originalGroundCheckOffset + wingsHeight; // <- aggiusta il ground check per la nuova altezza
-
-        StopAllCoroutines(); // <- ferma eventuali slide o jump in corso
-        _isSliding = false;
-        _isJumping = false;
-        
-        if (_capsule.height != _originalColliderHeight) _capsule.height = _originalColliderHeight; // <- ripristina il collider se era ridotto per lo slide
-    }
-
-    public void ExitWings()
-    {
-        if (!_isUsingWings || _wingsTransitionInProgress) return; // <- per prevenire disattivazioni multiple
-
-        _wingsTransitionInProgress = true;
-
-        StartCoroutine(BackToGround()); // <- inizia la coroutine per il movimento verso il basso
-
-    }
-
-    private System.Collections.IEnumerator MoveUp()
-    {
-        Vector3 startPos = transform.position;
-        Vector3 targetPos = new Vector3(transform.position.x, _originalPosition.y + wingsHeight, transform.position.z);
-
-        float elapsedTime = 0f;
-        float transitionDuration = wingsHeight / wingsTransitionSpeed;
-
-        while (elapsedTime < transitionDuration)
-        {
-            elapsedTime += Time.deltaTime;
-            float t = elapsedTime / transitionDuration;
-
-            t = Mathf.Sin(t * Mathf.PI * 0.5f); // <- usa una curva smooth con Sin per un movimento molto fluido
-
-            Vector3 currentPos = Vector3.Lerp(startPos, targetPos, t);
-            transform.position = currentPos;
-
-            yield return null;
-        }
-
-        transform.position = targetPos;
-        _wingsTransitionInProgress = false;
-    }
-
-    private System.Collections.IEnumerator BackToGround()
-    {
-        Vector3 startPos = transform.position;
-        Vector3 targetPos = new Vector3(transform.position.x, _originalPosition.y, transform.position.z);
-
-        float elapsedTime = 0f;
-        float transitionDuration = wingsHeight / wingsTransitionSpeed;
-
-        while (elapsedTime < transitionDuration)
-        {
-            elapsedTime += Time.deltaTime;
-            float t = elapsedTime / transitionDuration;
-
-            t = Mathf.Sin(t * Mathf.PI * 0.5f); // <- usa una curva smooth con Sin per un movimento molto fluido
-
-            Vector3 currentPos = Vector3.Lerp(startPos, targetPos, t);
-            transform.position = currentPos;
-
-            yield return null;
-        }
-
-        transform.position = targetPos;
-
-        _rb.isKinematic = false;
-
-        groundCheckOffset = _originalGroundCheckOffset; // <- ripristina il ground check offset originale
-
-
-        // Reset delle variabili
-        _isUsingWings = false;
-        _wingsTransitionInProgress = false;
     }
     #endregion
 }
