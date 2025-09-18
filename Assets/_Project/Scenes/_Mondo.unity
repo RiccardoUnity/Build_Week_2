@@ -954,7 +954,6 @@ MonoBehaviour:
   onCoinPickUp:
     m_PersistentCalls:
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
       m_Calls:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
@@ -968,9 +967,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-=======
-      m_Calls: []
->>>>>>> Stashed changes
 =======
       m_Calls: []
 >>>>>>> Stashed changes

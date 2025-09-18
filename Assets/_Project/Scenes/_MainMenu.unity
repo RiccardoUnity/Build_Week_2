@@ -172,7 +172,6 @@ MonoBehaviour:
   weight: 1
   sharedProfile: {fileID: 11400000, guid: a6560a915ef98420e9faacc1c7438823, type: 2}
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
 --- !u!1001 &285094415
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -333,8 +332,6 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: 127a49fda29b14e5d8df08975fb2e03a, type: 3}
 =======
 >>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 --- !u!1 &453512311
 GameObject:
   m_ObjectHideFlags: 0
@@ -489,10 +486,7 @@ MonoBehaviour:
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
 =======
-=======
->>>>>>> Stashed changes
 --- !u!1001 &1618930647
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -566,9 +560,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 127a49fda29b14e5d8df08975fb2e03a, type: 3}
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
 >>>>>>> Stashed changes
 --- !u!1 &1665124452
 GameObject:
@@ -781,11 +772,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 453512312}
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
   - {fileID: 285094415}
-=======
-  - {fileID: 1618930647}
->>>>>>> Stashed changes
 =======
   - {fileID: 1618930647}
 >>>>>>> Stashed changes
