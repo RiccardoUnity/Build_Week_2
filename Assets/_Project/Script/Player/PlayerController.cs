@@ -251,13 +251,8 @@ public class PlayerController : MonoBehaviour
 
         _originalPosition = transform.position;
         _originalGroundCheckOffset = groundCheckOffset;
-
-        _rb.velocity = Vector3.zero;
-        _rb.angularVelocity = Vector3.zero;
         
         _rb.isKinematic = true;
-
-        StartCoroutine(MoveUp()); // <- inizia la coroutine per il movimento verso l'alto
 
         groundCheckOffset = _originalGroundCheckOffset + wingsHeight; // <- aggiusta il ground check per la nuova altezza
 
@@ -266,6 +261,8 @@ public class PlayerController : MonoBehaviour
         _isJumping = false;
         
         if (_capsule.height != _originalColliderHeight) _capsule.height = _originalColliderHeight; // <- ripristina il collider se era ridotto per lo slide
+
+        StartCoroutine(TakeOff()); // <- inizia la coroutine per il movimento verso l'alto
     }
 
     public void ExitWings()
@@ -274,14 +271,14 @@ public class PlayerController : MonoBehaviour
 
         _wingsTransitionInProgress = true;
 
-        StartCoroutine(BackToGround()); // <- inizia la coroutine per il movimento verso il basso
+        StartCoroutine(Landing()); // <- inizia la coroutine per il movimento verso il basso
 
     }
 
-    private System.Collections.IEnumerator MoveUp()
+    private IEnumerator TakeOff()
     {
-        Vector3 startPos = transform.position;
-        Vector3 targetPos = new Vector3(transform.position.x, _originalPosition.y + wingsHeight, transform.position.z);
+        float startPos = transform.position.y;
+        float targetPos = wingsHeight;
 
         float elapsedTime = 0f;
         float transitionDuration = wingsHeight / wingsTransitionSpeed;
@@ -293,20 +290,20 @@ public class PlayerController : MonoBehaviour
 
             t = Mathf.Sin(t * Mathf.PI * 0.5f); // <- usa una curva smooth con Sin per un movimento molto fluido
 
-            Vector3 currentPos = Vector3.Lerp(startPos, targetPos, t);
-            transform.position = currentPos;
+            float currentPos = Mathf.Lerp(startPos, targetPos, t);
+            transform.position = new Vector3(transform.position.x, currentPos, transform.position.z);
 
             yield return null;
         }
 
-        transform.position = targetPos;
+        transform.position = new Vector3(transform.position.x, targetPos, transform.position.z);
         _wingsTransitionInProgress = false;
     }
 
-    private System.Collections.IEnumerator BackToGround()
+    private IEnumerator Landing()
     {
-        Vector3 startPos = transform.position;
-        Vector3 targetPos = new Vector3(transform.position.x, _originalPosition.y, transform.position.z);
+        float startPos = transform.position.y;
+        float targetPos = 0f;
 
         float elapsedTime = 0f;
         float transitionDuration = wingsHeight / wingsTransitionSpeed;
@@ -318,13 +315,13 @@ public class PlayerController : MonoBehaviour
 
             t = Mathf.Sin(t * Mathf.PI * 0.5f); // <- usa una curva smooth con Sin per un movimento molto fluido
 
-            Vector3 currentPos = Vector3.Lerp(startPos, targetPos, t);
-            transform.position = currentPos;
+            float currentPos = Mathf.Lerp(startPos, targetPos, t);
+            transform.position = new Vector3(transform.position.x, currentPos, transform.position.z);
 
             yield return null;
         }
 
-        transform.position = targetPos;
+        transform.position = new Vector3(transform.position.x, targetPos, transform.position.z);
 
         _rb.isKinematic = false;
 

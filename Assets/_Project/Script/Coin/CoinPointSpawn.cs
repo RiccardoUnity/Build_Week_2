@@ -33,7 +33,6 @@ public class CoinPointSpawn : MonoBehaviour
     {
         yield return null;
         GetComponent<SphereCollider>().enabled = true;
-        Debug.Log("Qui");
     }
 
     public Lane GetLane() => _lane;
