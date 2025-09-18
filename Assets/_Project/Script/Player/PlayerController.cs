@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     private float _horizontalInput;
 
     public float onLaneDistance = 3f;
-    public float laneMultiplier = 80f;
+    public float laneMultiplier = 120f;
     private int _laneInput = 1; // <- 0: sinistra   1: centro   2: destra
 
     [Header("Running Settings")]
@@ -252,10 +252,10 @@ public class PlayerController : MonoBehaviour
         _originalPosition = transform.position;
         _originalGroundCheckOffset = groundCheckOffset;
 
-        _rb.isKinematic = true;
-
         _rb.velocity = Vector3.zero;
         _rb.angularVelocity = Vector3.zero;
+        
+        _rb.isKinematic = true;
 
         StartCoroutine(MoveUp()); // <- inizia la coroutine per il movimento verso l'alto
 
