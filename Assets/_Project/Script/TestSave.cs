@@ -6,9 +6,9 @@ public class TestSave : MonoBehaviour
 {
     IEnumerator Start()
     {
-        Save.GetPowerUp();
-        //Save.powerUp.IncreasePowerUp(SGM.PowerUpType.Wings);
+        //Save.ResetCoin();
+        //Save.SaveCoin(500);
         yield return null;
-        Debug.Log(Save.powerUp.WingsLevel);
+        Debug.Log(Save.GetCoin());
     }
 }
