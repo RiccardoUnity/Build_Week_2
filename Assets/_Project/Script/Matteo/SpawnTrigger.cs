@@ -2,12 +2,7 @@ using UnityEngine;
 
 public class SpawnTrigger : MonoBehaviour
 {
-    private TerrainPooler pooler;
-
-    void Start()
-    {
-        pooler = FindObjectOfType<TerrainPooler>();
-    }
+    [SerializeField] private TerrainPooler pooler;
 
     void OnTriggerEnter(Collider other)
     {
