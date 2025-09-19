@@ -133,6 +133,8 @@ public class PlayerController : MonoBehaviour
 
     private void ChangeLane() // <- gestisce il cambio di corsia
     {
+        if (!_isGrounded) return;
+
         if (Input.GetKeyDown(KeyCode.A))
         {
             _laneInput--;
