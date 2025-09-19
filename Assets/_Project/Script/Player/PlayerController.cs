@@ -120,8 +120,13 @@ public class PlayerController : MonoBehaviour
 
         float forcedHorizontalInput = _horizontalInput;
 
-        if (_laneInput == 0 && _horizontalInput < 0) forcedHorizontalInput = 0; // <- corsia sinistra, input sinistra
-        if (_laneInput == 2 && _horizontalInput > 0) forcedHorizontalInput = 0; // <- corsia destra, input destra
+        if (!_isGrounded && !_isUsingWings) forcedHorizontalInput = 0f; // <- se non tocca terra, non può muoversi orizzontalmente
+
+        else
+        {
+            if (_laneInput == 0 && _horizontalInput < 0) forcedHorizontalInput = 0f; // <- se già in corsia sinistra, forza input sinistra
+            if (_laneInput == 2 && _horizontalInput > 0) forcedHorizontalInput = 0f; // <- se già in corsia destra, forza input destra
+        }
 
         Vector3 fwdMove = transform.forward * (forwardSpeed * S_GameManager.Difficulty() * Time.fixedDeltaTime);
         Vector3 horMove = transform.right * (forcedHorizontalInput * horizontalMultiplier) * (forwardSpeed * Time.fixedDeltaTime);
@@ -133,7 +138,7 @@ public class PlayerController : MonoBehaviour
 
     private void ChangeLane() // <- gestisce il cambio di corsia
     {
-        if (!_isGrounded) return;
+        if (!_isGrounded) return; // <- se non tocca terra, non può muoversi orizzontalmente
 
         if (Input.GetKeyDown(KeyCode.A))
         {
