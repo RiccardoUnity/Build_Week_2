@@ -60,6 +60,10 @@ public class CoinLocalManager : MonoBehaviour
                 _coinPointSpawns.Add(coins[i]);
             }
 
+            foreach (var coin in _coinPointSpawns)
+            {
+                coin.EnableCollider();
+            }
             _isCleanned = true;
         }
 

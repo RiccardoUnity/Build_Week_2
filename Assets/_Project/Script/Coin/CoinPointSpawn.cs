@@ -25,13 +25,10 @@ public class CoinPointSpawn : MonoBehaviour
         {
             _lane = Lane.Right;
         }
-
-        StartCoroutine(EnableCollider());
     }
 
-    IEnumerator EnableCollider()
+    public void EnableCollider()
     {
-        yield return null;
         GetComponent<SphereCollider>().enabled = true;
     }
 
