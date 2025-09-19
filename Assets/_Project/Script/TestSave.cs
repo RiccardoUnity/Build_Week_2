@@ -6,8 +6,8 @@ public class TestSave : MonoBehaviour
 {
     IEnumerator Start()
     {
-        //Save.ResetCoin();
-        //Save.SaveCoin(500);
+        Save.ResetCoin();
+        Save.SaveCoin(500);
         yield return null;
         Debug.Log(Save.GetCoin());
     }

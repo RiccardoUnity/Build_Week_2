@@ -13,9 +13,9 @@ public abstract class SO_BasePowerUp : ScriptableObject
     public int cost;
     public Level level;
 
-    [Header("Timer Ricarica")]
-    public float rechargeTime = 10f;
-    IEnumerator timer;
+    [Header("Timer")]
+    public float durationTime = 10f;
+    IEnumerator _timer;
 
     public IEnumerator Timer(PlayerPowerUp player) // <- coroutine per il timer di ricarica
     {

@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using Save = SGM.S_SaveManager;
 
 public class CoinUI : MonoBehaviour
 {
@@ -8,7 +7,7 @@ public class CoinUI : MonoBehaviour
 
     void Start()
     {
-        _coinText.text = Save.GetCoin().ToString();
+        _coinText.text = "0";
         CoinManager.Instance.onCoinPickUp.AddListener(UpdateUI);
     }
 

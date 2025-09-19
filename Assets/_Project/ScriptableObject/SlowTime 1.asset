@@ -19,4 +19,5 @@ MonoBehaviour:
   cost: 70
   level: 1
   rechargeTime: 26
-  _slowTime: 0.25
+  durationTime: 2
+  _slowTime: 0.5
