@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using SGM;
+
 public class MainMenuManager : MonoBehaviour
 {
     [SerializeField] GameObject _mainMenuScene;
@@ -41,8 +39,8 @@ public class MainMenuManager : MonoBehaviour
     {
         audioSource.Play();
     }
-    public void SceneLoader(string _SceneName)
+    public void SceneLoader(int value)
     {
-        SceneManager.LoadScene(_SceneName);
+        SceneManager.LoadScene(value);
     }
 }

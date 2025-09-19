@@ -147,6 +147,7 @@ namespace SGM
         public static void SaveMusic(float value) => PlayerPrefs.SetFloat(_music, value);
         public static void SaveBrightness(float value) => PlayerPrefs.SetFloat(_brightness, value);
         public static void SaveCoin(int value) => PlayerPrefs.SetInt(_coin, GetCoin() + value);
+        public static void ResetCoin() => PlayerPrefs.SetInt(_coin, 0);
         #endregion
 
         #region Leaderboard
@@ -183,7 +184,7 @@ namespace SGM
                 }
                 catch
                 {
-                    Debug.LogError("Qualcosa ï¿½ andato ESTREMAMENTE storto nella lettura della Leaderboard");
+                    Debug.LogError("Qualcosa è andato ESTREMAMENTE storto nella lettura della Leaderboard");
                     return null;
                 }
             }
