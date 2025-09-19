@@ -120,7 +120,12 @@ public class PlayerController : MonoBehaviour
 
         float forcedHorizontalInput = _horizontalInput;
 
-        if (!_isGrounded && !_isUsingWings) forcedHorizontalInput = 0f; // <- se non tocca terra, non può muoversi orizzontalmente
+        if (!_isGrounded && !_isUsingWings)
+        {
+            forcedHorizontalInput = 0f; // <- se non tocca terra, non può muoversi orizzontalmente
+            HandleRunningSounds();
+            return;
+        }
 
         else
         {

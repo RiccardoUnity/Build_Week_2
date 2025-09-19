@@ -219,12 +219,14 @@ MonoBehaviour:
   _sfxSource: {fileID: 0}
   _mainMenuMusic: {fileID: 0}
   _gameplayMusic: {fileID: 0}
-  _runningSound: {fileID: 0}
+  _runningSounds: []
   _jumpSound: {fileID: 0}
   _slideSound: {fileID: 0}
   _coinCollectSound: {fileID: 0}
   _powerUpCollectSound: {fileID: 0}
   _obstacleHitSound: {fileID: 0}
+  _randomizeFootsteps: 1
+  _preventConsecutiveRepeats: 1
   _musicVolume: 0.7
   _sfxVolume: 0.8
   _fadeDuration: 1
@@ -246,7 +248,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &277816401
 Transform:
   m_ObjectHideFlags: 0
@@ -333,6 +335,74 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 10, y: 2.220446e-16, z: 10}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1001 &295983992
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2832993426906031693, guid: 4904ce8a3e3c78a418bf9e80c3c4d948,
+        type: 3}
+      propertyPath: m_Name
+      value: Deserto
+      objectReference: {fileID: 0}
+    - target: {fileID: 7112135806651255549, guid: 4904ce8a3e3c78a418bf9e80c3c4d948,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7112135806651255549, guid: 4904ce8a3e3c78a418bf9e80c3c4d948,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7112135806651255549, guid: 4904ce8a3e3c78a418bf9e80c3c4d948,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7112135806651255549, guid: 4904ce8a3e3c78a418bf9e80c3c4d948,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7112135806651255549, guid: 4904ce8a3e3c78a418bf9e80c3c4d948,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7112135806651255549, guid: 4904ce8a3e3c78a418bf9e80c3c4d948,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7112135806651255549, guid: 4904ce8a3e3c78a418bf9e80c3c4d948,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7112135806651255549, guid: 4904ce8a3e3c78a418bf9e80c3c4d948,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7112135806651255549, guid: 4904ce8a3e3c78a418bf9e80c3c4d948,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7112135806651255549, guid: 4904ce8a3e3c78a418bf9e80c3c4d948,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4904ce8a3e3c78a418bf9e80c3c4d948, type: 3}
 --- !u!1 &453512311
 GameObject:
   m_ObjectHideFlags: 0
@@ -881,12 +951,12 @@ PrefabInstance:
     - target: {fileID: 8808179081302253511, guid: 1fe01c15d35d1ec43bbac4b7c603a1bd,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 8808179081302253511, guid: 1fe01c15d35d1ec43bbac4b7c603a1bd,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.79
       objectReference: {fileID: 0}
     - target: {fileID: 8808179081302253511, guid: 1fe01c15d35d1ec43bbac4b7c603a1bd,
         type: 3}
@@ -1255,6 +1325,8 @@ MonoBehaviour:
   runningSoundInterval: 0.5
   jumpForce: 8
   slideDuration: 1
+  wingsHeight: 5
+  wingsTransitionSpeed: 3
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 8
@@ -1275,3 +1347,4 @@ SceneRoots:
   - {fileID: 2131674844}
   - {fileID: 254410086}
   - {fileID: 1715255535}
+  - {fileID: 295983992}
