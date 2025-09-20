@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using SGM;
 using TMPro;
+using UnityEngine;
 
 public class LeaderBoardManager : MonoBehaviour
 {
@@ -33,6 +31,8 @@ public class LeaderBoardManager : MonoBehaviour
     public void ResetLeaderboard()
     {
         S_SaveManager.ResetLeaderboard();
+        S_SaveManager.ResetPowerUp();
+        S_SaveManager.ResetCoin();
         RefreshLeaderboardUI();
     }
 }

@@ -1,0 +1,88 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!181963792 &2655988077585873504
+Preset:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: PlayerPowerUp
+  m_TargetType:
+    m_NativeTypeID: 114
+    m_ManagedTypePPtr: {fileID: 11500000, guid: 0362a1a804559a449997f03d49252221,
+      type: 3}
+    m_ManagedTypeFallback: 
+  m_Properties:
+  - target: {fileID: 0}
+    propertyPath: m_Enabled
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorHideFlags
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorClassIdentifier
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _doubleCoins.Array.size
+    value: 3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _doubleCoins.Array.data[0]
+    value: 
+    objectReference: {fileID: 11400000, guid: e541407ac3be75645b8ad639709310a9, type: 2}
+  - target: {fileID: 0}
+    propertyPath: _doubleCoins.Array.data[1]
+    value: 
+    objectReference: {fileID: 11400000, guid: a74252c338e3eca4d992c22e0e31d2ba, type: 2}
+  - target: {fileID: 0}
+    propertyPath: _doubleCoins.Array.data[2]
+    value: 
+    objectReference: {fileID: 11400000, guid: 5f7fa64e0af475e47a4d0b0010cc1bf4, type: 2}
+  - target: {fileID: 0}
+    propertyPath: doubleCoinsEvent.m_PersistentCalls.m_Calls.Array.size
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _wings.Array.size
+    value: 3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _wings.Array.data[0]
+    value: 
+    objectReference: {fileID: 11400000, guid: 9f0471b9a5c54f649b7ce4102e300709, type: 2}
+  - target: {fileID: 0}
+    propertyPath: _wings.Array.data[1]
+    value: 
+    objectReference: {fileID: 11400000, guid: 5b85b81a23ea332458dc9c3a62b30776, type: 2}
+  - target: {fileID: 0}
+    propertyPath: _wings.Array.data[2]
+    value: 
+    objectReference: {fileID: 11400000, guid: 79a769f68dffba643bd748a0cd859d76, type: 2}
+  - target: {fileID: 0}
+    propertyPath: wingsEvent.m_PersistentCalls.m_Calls.Array.size
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _slowTime.Array.size
+    value: 3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _slowTime.Array.data[0]
+    value: 
+    objectReference: {fileID: 11400000, guid: 2fa6ed2a804a20e4985e969e2c1eb2a8, type: 2}
+  - target: {fileID: 0}
+    propertyPath: _slowTime.Array.data[1]
+    value: 
+    objectReference: {fileID: 11400000, guid: ecbac1b574e549045a696cccbbacc4a1, type: 2}
+  - target: {fileID: 0}
+    propertyPath: _slowTime.Array.data[2]
+    value: 
+    objectReference: {fileID: 11400000, guid: a834f53cd263c5344b6b66ba5d65b31d, type: 2}
+  - target: {fileID: 0}
+    propertyPath: slowTimeEvent.m_PersistentCalls.m_Calls.Array.size
+    value: 0
+    objectReference: {fileID: 0}
+  m_ExcludedProperties: []

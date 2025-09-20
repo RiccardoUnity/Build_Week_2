@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1649759374493307768}
   - component: {fileID: 766958706015514719}
   - component: {fileID: 1428482001049054558}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Muretto
   m_TagString: Untagged
   m_Icon: {fileID: 0}

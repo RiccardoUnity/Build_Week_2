@@ -5,7 +5,7 @@ public class SO_Wings : SO_BasePowerUp
 {
     protected override void EnterUse(PlayerPowerUp player)
     {
-        //player.GetPlayerController().
+        player.GetPlayerController().EnterWings();
     }
 
     protected override void StayUse(PlayerPowerUp player)
@@ -15,6 +15,6 @@ public class SO_Wings : SO_BasePowerUp
 
     protected override void ExitUse(PlayerPowerUp player)
     {
-        //player.GetPlayerController().
+        player.GetPlayerController().ExitWings();
     }
 }

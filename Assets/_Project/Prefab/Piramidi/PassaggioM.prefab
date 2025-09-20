@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1088449692254967824}
   - component: {fileID: 2348417047490985543}
   - component: {fileID: 7273394604862287949}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PassaggioM
   m_TagString: Untagged
   m_Icon: {fileID: 0}

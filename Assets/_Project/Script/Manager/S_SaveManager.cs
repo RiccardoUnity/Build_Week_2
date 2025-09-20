@@ -75,21 +75,21 @@ namespace SGM
     [System.Serializable]
     public class PowerUp
     {
-        private int _doubleCoinsLevel;
+        [JsonProperty] private int _doubleCoinsLevel;
         public int DoubleCoinsLevel
         {
             get => _doubleCoinsLevel;
             private set => _doubleCoinsLevel = value;
         }
 
-        private int _wingsLevel;
+        [JsonProperty] private int _wingsLevel;
         public int WingsLevel
         {
             get => _wingsLevel;
             private set => _wingsLevel = value;
         }
 
-        private int _slowTimeLevel;
+        [JsonProperty] private int _slowTimeLevel;
         public int SlowTimeLevel
         {
             get => _slowTimeLevel;
@@ -135,14 +135,19 @@ namespace SGM
         private static string _music = "music";
         private static string _brightness = "brightness";
         private static float _defaultValue = 0.5f;
+        private static string _coin = "coin";
+        private static int _defaultCoin = 0;
 
         public static float GetEffects() => PlayerPrefs.GetFloat(_effects, _defaultValue);
         public static float GetMusic() => PlayerPrefs.GetFloat(_music, _defaultValue);
         public static float GetBrightness() => PlayerPrefs.GetFloat(_brightness, _defaultValue);
+        public static int GetCoin() => PlayerPrefs.GetInt(_coin, _defaultCoin);
 
         public static void SaveEffects(float value) => PlayerPrefs.SetFloat(_effects, value);
         public static void SaveMusic(float value) => PlayerPrefs.SetFloat(_music, value);
         public static void SaveBrightness(float value) => PlayerPrefs.SetFloat(_brightness, value);
+        public static void SaveCoin(int value) => PlayerPrefs.SetInt(_coin, GetCoin() + value);
+        public static void ResetCoin() => PlayerPrefs.SetInt(_coin, 0);
         #endregion
 
         #region Leaderboard
@@ -179,7 +184,7 @@ namespace SGM
                 }
                 catch
                 {
-                    Debug.LogError("Qualcosa ï¿½ andato ESTREMAMENTE storto nella lettura della Leaderboard");
+                    Debug.LogError("Qualcosa è andato ESTREMAMENTE storto nella lettura della Leaderboard");
                     return null;
                 }
             }
@@ -230,20 +235,8 @@ namespace SGM
             {
                 try
                 {
-<<<<<<< Updated upstream
                     string stringPowerUp = File.ReadAllText(_pathPowerUp);
                     powerUp = JsonConvert.DeserializeObject<PowerUp>(stringPowerUp);
-=======
-                    try
-                    {
-                        string stringPowerUp = File.ReadAllText(_pathPowerUp);
-                        powerUp = JsonConvert.DeserializeObject<PowerUp>(stringPowerUp);
-                    }
-                    catch
-                    {
-                        Debug.LogError("Qualcosa ï¿½ andato ESTREMAMENTE storto nella lettura dei PowerUp");
-                    }
->>>>>>> Stashed changes
                 }
                 catch
                 {

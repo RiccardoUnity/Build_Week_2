@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+using SGM;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using SGM;
 
 public class PowerUpShop_manager : MonoBehaviour
 {
@@ -18,6 +16,7 @@ public class PowerUpShop_manager : MonoBehaviour
 
     private Color originalColor = Color.white;
 
+    [SerializeField] private TMP_Text _coinCounter;
 
     private void Start()
     {
@@ -44,12 +43,16 @@ public class PowerUpShop_manager : MonoBehaviour
                 trigger.triggers.Add(entryExit);
             }
         }
+
+        _coinCounter.text = S_SaveManager.GetCoin().ToString();
     }
 
     private Color GetColorForPowerUp(PowerUpType type)
     {
         if (S_SaveManager.powerUp == null)
             S_SaveManager.GetPowerUp();
+
+        _coinCounter.text = S_SaveManager.GetCoin().ToString();
 
         int level = type switch
         {

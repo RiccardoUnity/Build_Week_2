@@ -16,7 +16,6 @@ MonoBehaviour:
   powerUpName: Wings 1
   description: 
   icon: {fileID: 0}
-  cost: 0
-  level: 0
-  inputKey: 1
-  rechargeTime: 10
+  cost: 60
+  level: 1
+  rechargeTime: 25

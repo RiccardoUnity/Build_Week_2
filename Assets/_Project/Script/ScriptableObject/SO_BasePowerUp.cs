@@ -13,13 +13,13 @@ public abstract class SO_BasePowerUp : ScriptableObject
     public int cost;
     public Level level;
 
-    [Header("Timer Ricarica")]
-    public float rechargeTime = 10f;
-    IEnumerator timer;
+    [Header("Timer")]
+    public float durationTime = 10f;
+    IEnumerator _timer;
 
     public IEnumerator Timer(PlayerPowerUp player) // <- coroutine per il timer di ricarica
     {
-        float timer = rechargeTime * (int)level;
+        float timer = durationTime * (int)level;
         Debug.Log($"Iniziando ricarica per {powerUpName} - {timer} secondi");
 
         EnterUse(player);
@@ -32,14 +32,15 @@ public abstract class SO_BasePowerUp : ScriptableObject
         yield return null;
         ExitUse(player);
         Debug.Log($"Ricarica completata per {powerUpName}");
+        _timer = null;
     }
 
     public void Use(PlayerPowerUp player)
     {
-        if (timer != null)
+        if (_timer == null)
         {
-            timer = Timer(player);
-            player.StartCoroutine(timer);
+            _timer = Timer(player);
+            player.StartCoroutine(_timer);
         }
     }
 

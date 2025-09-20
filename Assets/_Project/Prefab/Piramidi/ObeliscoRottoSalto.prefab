@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6727524349748318350}
   - component: {fileID: 5268911874307472221}
   - component: {fileID: 2608309059046847109}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ObeliscoRottoSalto
   m_TagString: Untagged
   m_Icon: {fileID: 0}

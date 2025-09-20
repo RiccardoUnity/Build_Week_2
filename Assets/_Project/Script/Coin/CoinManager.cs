@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using Save = SGM.S_SaveManager;
 
 //Singleton molto semplice
 //Chiamare da Start in poi
@@ -24,6 +25,8 @@ public class CoinManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        FindAnyObjectByType<PlayerController>().playerDeadEvent.AddListener(SaveCoin);
     }
 
     public int GetPlayerLayerMask() => _playerLayerMask.value;
@@ -34,14 +37,20 @@ public class CoinManager : MonoBehaviour
     {
         if (_isDoubleCoins)
         {
-            ++_coinPickUp;
+            _coinPickUp += 2;
         }
         else
         {
-            _coinPickUp += 2;
+            ++_coinPickUp;
         }
         onCoinPickUp?.Invoke(_coinPickUp);
     }
 
     public int GetCoinPickUp() => _coinPickUp;
+
+    private void SaveCoin()
+    {
+        Save.SaveCoin(_coinPickUp);
+        _coinPickUp = 0;
+    }
 }

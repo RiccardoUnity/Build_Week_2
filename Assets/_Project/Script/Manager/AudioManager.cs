@@ -16,12 +16,16 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip _gameplayMusic;
 
     [Header("SFX Settings")]
-    [SerializeField] private AudioClip _runningSound;
+    [SerializeField] private AudioClip[] _runningSounds;
     [SerializeField] private AudioClip _jumpSound;
     [SerializeField] private AudioClip _slideSound;
     [SerializeField] private AudioClip _coinCollectSound;
     [SerializeField] private AudioClip _powerUpCollectSound;
     [SerializeField] private AudioClip _obstacleHitSound;
+
+    [Header("Footsteps Settings")]
+    [SerializeField] private bool _randomizeFootsteps = true; // <- se randomizzare i suoni o meno
+    [SerializeField] private bool _preventConsecutiveRepeats = true; // <- per evitare di ripetere lo stesso suono consecutivamente
 
     [Header("Audio Settings")]
     [Range(0f, 1f)]
@@ -33,6 +37,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private float _fadeDuration = 1f;
 
     private bool _isFading = false;
+    private int _lastFootstepIndex = -1; // <- per evitare ripetizioni consecutive
 
     void Awake() // <- gestisce l'implementazione del Singleton
     {
@@ -121,9 +126,67 @@ public class AudioManager : MonoBehaviour
     #region SFX Methods
     public void PlayRunningSound()
     {
-        if (_runningSound != null) _sfxSource.PlayOneShot(_runningSound);
+        if (_runningSounds != null && _runningSounds.Length > 0)
+        {
+            AudioClip clipToPlay = GetRandomFootstepClip();
+
+            if (clipToPlay != null) _sfxSource.PlayOneShot(clipToPlay);
+        }
     }
-    
+
+    private AudioClip GetRandomFootstepClip()
+    {
+        if (_runningSounds.Length == 0) return null;
+
+        if (_runningSounds.Length == 1)
+        {
+            return _runningSounds[0];
+        }
+
+        int randomIndex;
+
+        if (_randomizeFootsteps)
+        {
+            if (_preventConsecutiveRepeats && _runningSounds.Length > 1)
+            {
+                do
+                {
+                    randomIndex = Random.Range(0, _runningSounds.Length);
+                } 
+                while (randomIndex == _lastFootstepIndex);
+            }
+            else
+            {
+                randomIndex = Random.Range(0, _runningSounds.Length);
+            }
+        }
+        else
+        {
+            randomIndex = (_lastFootstepIndex + 1) % _runningSounds.Length;
+        }
+
+        _lastFootstepIndex = randomIndex;
+        return _runningSounds[randomIndex];
+    }
+
+    // Metodo alternativo per scegliere un suono specifico
+    public void PlayRunningSound(int index)
+    {
+        if (_runningSounds != null && index >= 0 && index < _runningSounds.Length)
+        {
+            if (_runningSounds[index] != null)
+            {
+                _sfxSource.PlayOneShot(_runningSounds[index]);
+                _lastFootstepIndex = index;
+            }
+        }
+    }
+
+    public void PlayRandomRunningSound()
+    {
+        PlayRunningSound();
+    }
+
     public void PlayJumpSound()
     {
         if (_jumpSound != null) _sfxSource.PlayOneShot(_jumpSound);
@@ -152,6 +215,33 @@ public class AudioManager : MonoBehaviour
     public void PlaySFX(AudioClip clip)
     {
         if (clip != null) _sfxSource.PlayOneShot(clip);
+    }
+    #endregion
+
+    #region Footsteps Configuration Methods
+    public void SetRandomizeFootsteps(bool randomize)
+    {
+        _randomizeFootsteps = randomize;
+    }
+
+    public void SetPreventConsecutiveRepeats(bool prevent)
+    {
+        _preventConsecutiveRepeats = prevent;
+    }
+
+    public bool IsRandomizeFootstepsEnabled()
+    {
+        return _randomizeFootsteps;
+    }
+
+    public bool IsPreventConsecutiveRepeatsEnabled()
+    {
+        return _preventConsecutiveRepeats;
+    }
+
+    public int GetFootstepsCount()
+    {
+        return _runningSounds != null ? _runningSounds.Length : 0;
     }
     #endregion
 

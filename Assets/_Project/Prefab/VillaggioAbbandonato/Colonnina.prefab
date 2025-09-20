@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 289072087435413802}
   - component: {fileID: 355857159962932626}
   - component: {fileID: 658640367370466619}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Colonnina
   m_TagString: Untagged
   m_Icon: {fileID: 0}
