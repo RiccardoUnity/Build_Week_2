@@ -86,7 +86,7 @@ public class PlayerController : MonoBehaviour
 
             GroundChecker();
 
-            if (Input.GetKeyDown(KeyCode.S)) StartCoroutine(Slide());
+            if (Input.GetKeyDown(KeyCode.S) && _isGrounded) StartCoroutine(Slide());
 
             if (Input.GetKeyDown(KeyCode.W) && _isGrounded) Jump();
         }
@@ -124,7 +124,7 @@ public class PlayerController : MonoBehaviour
         {
             forcedHorizontalInput = 0f; // <- se non tocca terra, non può muoversi orizzontalmente
             HandleRunningSounds();
-            return;
+            //return;
         }
 
         else

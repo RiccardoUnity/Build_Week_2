@@ -5,15 +5,20 @@ using Save = SGM.S_SaveManager;
 public class UIGameOver : MonoBehaviour
 {
     [SerializeField] private GameObject _ui;
+    private bool _stayVisible;
 
     void Awake()
     {
-        gameObject.SetActive(false);
-        _ui.SetActive(true);
+        if (!_stayVisible)
+        {
+            gameObject.SetActive(false);
+            _ui.SetActive(true);
+        }
     }
 
     public void GameOverEvent()
     {
+        _stayVisible = true;
         gameObject.SetActive(true);
         _ui.SetActive(false);
         Save.SaveRecord();

@@ -593,6 +593,11 @@ PrefabInstance:
         type: 2}
     - target: {fileID: 5614430680831173394, guid: 1fe01c15d35d1ec43bbac4b7c603a1bd,
         type: 3}
+      propertyPath: jumpForce
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5614430680831173394, guid: 1fe01c15d35d1ec43bbac4b7c603a1bd,
+        type: 3}
       propertyPath: playerDeadEvent.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -1283,6 +1288,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1007344984}
+  - component: {fileID: 1007344985}
   m_Layer: 0
   m_Name: --- Ambient ---
   m_TagString: Untagged
@@ -1305,6 +1311,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1007344985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007344983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0853abec4e8a06548a133d4cb490d566, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _biomes:
+  - gameObject: {fileID: 2832993426906031693, guid: 4904ce8a3e3c78a418bf9e80c3c4d948,
+      type: 3}
+    lenghtZ: 200
+  - gameObject: {fileID: 7332026622881564161, guid: 662c84cbf26e6ec4c807bb1565404504,
+      type: 3}
+    lenghtZ: 200
+  - gameObject: {fileID: 587659263481838374, guid: 826f5f4d83f074f1bbddbad670ffbcfd,
+      type: 3}
+    lenghtZ: 200
+  - gameObject: {fileID: 6652251505136353489, guid: e83da7c9e8a8fa547b71d9f8b0b825dc,
+      type: 3}
+    lenghtZ: 200
+  _player: {fileID: 2034124699}
+  _startPoint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1008252222
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1417,6 +1450,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: UI_HUD
+      objectReference: {fileID: 0}
+    - target: {fileID: 8582672188217919318, guid: 73826d3861e675846836d139fa0a4693,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2487,6 +2525,12 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &2034124699 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6120956701477457726, guid: 1fe01c15d35d1ec43bbac4b7c603a1bd,
+    type: 3}
+  m_PrefabInstance: {fileID: 323458880}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2089525052
 GameObject:
   m_ObjectHideFlags: 0
@@ -2628,5 +2672,5 @@ SceneRoots:
   - {fileID: 453512312}
   - {fileID: 903236837}
   - {fileID: 182987509}
-  - {fileID: 1007344984}
   - {fileID: 839845174}
+  - {fileID: 1007344984}

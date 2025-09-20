@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7274968529643500203}
   - component: {fileID: 4625291495428134154}
   - component: {fileID: 4365604193013403249}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ObeliscoRotto
   m_TagString: Untagged
   m_Icon: {fileID: 0}
